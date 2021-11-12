@@ -3,7 +3,6 @@ defmodule Quizzez.Quizzes.Question do
   import Ecto.Changeset
 
   schema "questions" do
-    field :is_correct, :boolean, default: false
     field :text, :string
     field :quiz_id, :id
 
