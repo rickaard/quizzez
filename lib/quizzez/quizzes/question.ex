@@ -15,7 +15,7 @@ defmodule Quizzez.Quizzes.Question do
   @doc false
   def changeset(question, attrs) do
     question
-    |> cast(attrs, [:text, :is_correct])
-    |> validate_required([:text, :is_correct])
+    |> cast(attrs, [:text])
+    |> validate_required([:text])
   end
 end

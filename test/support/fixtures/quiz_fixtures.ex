@@ -26,7 +26,6 @@ defmodule Quizzez.QuizFixtures do
     {:ok, question} =
       attrs
       |> Enum.into(%{
-        is_correct: true,
         text: "some text"
       })
       |> Quizzez.Quiz.create_question()
