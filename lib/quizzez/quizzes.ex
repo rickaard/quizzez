@@ -7,6 +7,8 @@ defmodule Quizzez.Quizzes do
   alias Quizzez.Repo
 
   alias Quizzez.Quizzes.Quiz
+  alias Quizzez.Quizzes.Question
+  alias Quizzez.Quizzes.Answer
 
   @doc """
   Returns the list of quizzes.
@@ -19,6 +21,24 @@ defmodule Quizzez.Quizzes do
   """
   def list_quizzes do
     Repo.all(Quiz)
+  end
+
+  def list_quizzes_with_questions do
+    Quiz
+    |> Repo.all()
+    |> Repo.preload([:questions])
+  end
+
+  def list_questions_with_answers do
+    Question
+    |> Repo.all()
+    |> Repo.preload([:answers])
+  end
+
+  def get_quiz_with_questions_and_answers(id) do
+    Quiz
+    |> Repo.get!(id)
+    |> Repo.preload(questions: :answers)
   end
 
   @doc """
