@@ -64,7 +64,7 @@ defmodule Quizzez.QuizzesTest do
 
     import Quizzez.QuizzesFixtures
 
-    @invalid_attrs %{is_correct: nil, text: nil}
+    @invalid_attrs %{text: nil}
 
     test "list_questions/0 returns all questions" do
       question = question_fixture()
@@ -77,10 +77,9 @@ defmodule Quizzez.QuizzesTest do
     end
 
     test "create_question/1 with valid data creates a question" do
-      valid_attrs = %{is_correct: true, text: "some text"}
+      valid_attrs = %{text: "some text"}
 
       assert {:ok, %Question{} = question} = Quizzes.create_question(valid_attrs)
-      assert question.is_correct == true
       assert question.text == "some text"
     end
 
@@ -90,10 +89,9 @@ defmodule Quizzez.QuizzesTest do
 
     test "update_question/2 with valid data updates the question" do
       question = question_fixture()
-      update_attrs = %{is_correct: false, text: "some updated text"}
+      update_attrs = %{text: "some updated text"}
 
       assert {:ok, %Question{} = question} = Quizzes.update_question(question, update_attrs)
-      assert question.is_correct == false
       assert question.text == "some updated text"
     end
 

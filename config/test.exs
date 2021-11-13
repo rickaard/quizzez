@@ -7,11 +7,12 @@ import Config
 # Run `mix help test` for more information.
 config :quizzez, Quizzez.Repo,
   username: "postgres",
-  password: "postgres",
-  database: "quizzez_test#{System.get_env("MIX_TEST_PARTITION")}",
+  password: "password",
+  database: "quizzez_db_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox,
-  pool_size: 10
+  pool_size: 10,
+  port: 5432
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.

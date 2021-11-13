@@ -14,7 +14,7 @@ defmodule Quizzez.QuizFixtures do
         is_correct: true,
         text: "some text"
       })
-      |> Quizzez.Quiz.create_answer()
+      |> Quizzez.Quizzes.create_answer()
 
     answer
   end
@@ -28,7 +28,7 @@ defmodule Quizzez.QuizFixtures do
       |> Enum.into(%{
         text: "some text"
       })
-      |> Quizzez.Quiz.create_question()
+      |> Quizzez.Quizzes.create_question()
 
     question
   end

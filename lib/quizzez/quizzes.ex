@@ -1,4 +1,4 @@
-defmodule Quizzez.Quizz do
+defmodule Quizzez.Quizzes do
   @moduledoc """
   The Quizzes context.
   """
