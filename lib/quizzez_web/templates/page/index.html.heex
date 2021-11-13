@@ -3,6 +3,10 @@
 
 <section class="row">
   <article class="column">
+    <%= for quiz <- @quizzes do %>
+      <p>Title: <%= quiz.title %></p>
+      <p>Amount of questions: <%= Enum.count(quiz.questions) %></p>
+    <% end %>
   </article>
   <article class="column">
   </article>
