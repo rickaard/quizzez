@@ -1,0 +1,14 @@
+.container {
+    margin: 0 auto;
+    max-width: 80rem;
+    padding: 0 2rem;
+    position: relative;
+    width: 100%;
+}
+
+body {
+    color: #000000;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 1.6em;
+    line-height: 1.6;
+}

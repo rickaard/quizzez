@@ -1,0 +1,34 @@
+header {
+    width: 100%;
+    background: #fdfdfd;
+    margin-bottom: 2rem;
+    box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+}
+
+header a {
+    color: inherit;
+}
+
+.header-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header-nav__items {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header-nav__items li:not(:last-child) {
+    margin-right: 1.5rem;
+}
+
+.header-logo__big {
+    font-size: 3rem;
+}
+
+.header-logo__small {
+    font-size: 1.6rem;
+}
