@@ -17,5 +17,6 @@ defmodule Quizzez.Quizzes.Question do
     question
     |> cast(attrs, [:text])
     |> validate_required([:text])
+    |> cast_assoc(:answers, required: true)
   end
 end

@@ -18,5 +18,6 @@ defmodule Quizzez.Quizzes.Quiz do
     quiz
     |> cast(attrs, [:title, :description])
     |> validate_required([:title, :description])
+    |> cast_assoc(:questions, required: true)
   end
 end
