@@ -5,10 +5,29 @@ defmodule Quizzez.QuizTest do
 
   describe "answers" do
     alias Quizzez.Quizzes.Answer
+    alias Quizzez.Quizzes.Quiz
+    alias Quizzez.Quizzes.Question
 
     import Quizzez.QuizFixtures
 
     @invalid_attrs %{is_correct: nil, text: nil}
+
+    test "create_quiz with no questions or answer data is not valid" do
+      question_one =
+        Map.put(%{text: ""}, :answers, [
+          %{text: "2020", is_correct: false},
+          %{text: "2021", is_correct: true}
+        ])
+
+      full_quiz =
+        Map.put(%{title: "quiz title", description: "quiz description"}, :questions, [
+          question_one
+        ])
+
+      changeset = Quiz.changeset(%Quiz{}, full_quiz)
+      IO.inspect(changeset)
+      assert changeset.valid?
+    end
 
     test "list_answers/0 returns all answers" do
       answer = answer_fixture()
