@@ -29,6 +29,12 @@ defmodule Quizzez.Quizzes do
     |> Repo.preload([:questions])
   end
 
+  def list_quizzes_with_questions_and_answers do
+    Quiz
+    |> Repo.all()
+    |> Repo.preload(questions: :answers)
+  end
+
   def list_questions_with_answers do
     Question
     |> Repo.all()
@@ -39,6 +45,12 @@ defmodule Quizzez.Quizzes do
     Quiz
     |> Repo.get!(id)
     |> Repo.preload(questions: :answers)
+  end
+
+  def get_question_with_answers(id) do
+    Question
+    |> Repo.get!(id)
+    |> Repo.preload(:answers)
   end
 
   @doc """
@@ -167,6 +179,7 @@ defmodule Quizzez.Quizzes do
   """
   def create_question(attrs \\ %{}) do
     %Question{}
+    # |> Ecto.build_assoc(:answers)
     |> Question.changeset(attrs)
     |> Repo.insert()
   end
@@ -185,6 +198,7 @@ defmodule Quizzez.Quizzes do
   """
   def update_question(%Question{} = question, attrs) do
     question
+    # |> Ecto.build_assoc(:answers)
     |> Question.changeset(attrs)
     |> Repo.update()
   end

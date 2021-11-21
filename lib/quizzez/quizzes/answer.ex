@@ -18,7 +18,4 @@ defmodule Quizzez.Quizzes.Answer do
     |> cast(attrs, [:text, :is_correct])
     |> validate_required([:text, :is_correct])
   end
-
-  def has_one_correct_answer(answer, attrs) do
-  end
 end

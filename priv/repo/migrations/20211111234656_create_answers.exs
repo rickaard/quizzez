@@ -5,7 +5,7 @@ defmodule Quizzez.Repo.Migrations.CreateAnswers do
     create table(:answers) do
       add :text, :string
       add :is_correct, :boolean, default: false, null: false
-      add :question_id, references(:questions, on_delete: :nothing)
+      add :question_id, references(:questions, on_delete: :delete_all)
 
       timestamps()
     end

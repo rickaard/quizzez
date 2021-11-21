@@ -9,7 +9,7 @@ defmodule Quizzez.Quizzes.Quiz do
 
     timestamps()
 
-    has_many :questions, Quizzez.Quizzes.Question
+    has_many :questions, Quizzez.Quizzes.Question, on_delete: :delete_all, on_replace: :delete
     belongs_to :user, Quizzez.Accounts.User, define_field: false
   end
 
