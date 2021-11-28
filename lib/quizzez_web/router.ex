@@ -17,7 +17,7 @@ defmodule QuizzezWeb.Router do
   scope "/", QuizzezWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    resources "/", PageController
   end
 
   # Other scopes may use custom stacks.
