@@ -26,7 +26,7 @@ defmodule Quizzez.Quizzes do
   def list_quizzes_with_questions do
     Quiz
     |> Repo.all()
-    |> Repo.preload([:questions])
+    |> Repo.preload([:questions, :user])
   end
 
   def list_quizzes_with_questions_and_answers do
@@ -51,6 +51,12 @@ defmodule Quizzez.Quizzes do
     Question
     |> Repo.get!(id)
     |> Repo.preload(:answers)
+  end
+
+  def create_full_quiz(attrs \\ %{}) do
+    %Quiz{}
+    |> Quiz.changeset(attrs)
+    |> Repo.insert()
   end
 
   @doc """
@@ -118,6 +124,7 @@ defmodule Quizzez.Quizzes do
 
   """
   def delete_quiz(%Quiz{} = quiz) do
+    {:ok}
     Repo.delete(quiz)
   end
 

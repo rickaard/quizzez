@@ -14,8 +14,6 @@ alias Quizzez.Repo
 
 alias Quizzez.Accounts.User
 alias Quizzez.Quizzes.Quiz
-alias Quizzez.Quizzes.Question
-alias Quizzez.Quizzes.Answer
 
 ##### USERS #####
 user_1 =
@@ -35,61 +33,56 @@ user_2 =
 ##### USERS #####
 
 ##### FIRST QUIZ #####
-quiz =
-  Repo.insert!(%Quiz{
-    title: "Elixir Quiz",
-    description: "A little quix about Elixir and Pheonix",
-    user: user_1
-  })
+quiz_1_question_1_answer_1 = %{text: "2020", is_correct: false}
+quiz_1_question_1_answer_2 = %{text: "2010", is_correct: false}
+quiz_1_question_1_answer_3 = %{text: "2000", is_correct: false}
+quiz_1_question_1_answer_4 = %{text: "2012", is_correct: true}
 
-q_answer_1 =
-  Repo.insert!(%Answer{
-    text: "2020",
-    is_correct: false
-  })
+quiz_1_question_2_answer_1 = %{text: "Object Oriented Programming", is_correct: false}
+quiz_1_question_2_answer_2 = %{text: "Functional Programming", is_correct: true}
 
-q_answer_2 =
-  Repo.insert!(%Answer{
-    text: "2010",
-    is_correct: false
-  })
+quiz_1_question_3_answer_1 = %{text: "PostgreSQL", is_correct: true}
+quiz_1_question_3_answer_2 = %{text: "MySQL", is_correct: false}
+quiz_1_question_3_answer_3 = %{text: "MongoDB", is_correct: false}
+quiz_1_question_3_answer_4 = %{text: "MSSQL", is_correct: false}
 
-q_answer_3 =
-  Repo.insert!(%Answer{
-    text: "2000",
-    is_correct: false
-  })
+quiz_1_question_1 = %{
+  text: "When did Elixir get created?",
+  answers: [
+    quiz_1_question_1_answer_1,
+    quiz_1_question_1_answer_2,
+    quiz_1_question_1_answer_3,
+    quiz_1_question_1_answer_4
+  ]
+}
 
-q_answer_4 =
-  Repo.insert!(%Answer{
-    text: "2012",
-    is_correct: true
-  })
+quiz_1_question_2 = %{
+  text: "What kind of programming model is Elixir using?",
+  answers: [
+    quiz_1_question_2_answer_1,
+    quiz_1_question_2_answer_2
+  ]
+}
 
-first_quiz_question_1 =
-  Repo.insert!(%Question{
-    text: "When did Elixir get created?",
-    quiz: quiz,
-    answers: [q_answer_1, q_answer_2, q_answer_3, q_answer_4]
-  })
+quiz_1_question_3 = %{
+  text: "What kind of database is often used with Pheonix?",
+  answers: [
+    quiz_1_question_3_answer_1,
+    quiz_1_question_3_answer_2,
+    quiz_1_question_3_answer_3,
+    quiz_1_question_3_answer_4
+  ]
+}
 
-q2_anser_1 =
-  Repo.insert!(%Answer{
-    text: "Object Oriented Programming",
-    is_correct: false
-  })
-
-q2_anser_2 =
-  Repo.insert!(%Answer{
-    text: "Functional Programming",
-    is_correct: true
-  })
-
-first_quiz_question_2 =
-  Repo.insert!(%Question{
-    text: "What kind of programming model is Elixir using?",
-    quiz: quiz,
-    answers: [q2_anser_1, q2_anser_2]
-  })
+Repo.insert!(%Quiz{
+  title: "Elixir Quiz",
+  description: "A little quix about Elixir and Pheonix",
+  questions: [
+    quiz_1_question_1,
+    quiz_1_question_2,
+    quiz_1_question_3
+  ],
+  user: user_1
+})
 
 ##### FIRST QUIZ #####
