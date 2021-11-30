@@ -7,5 +7,13 @@
   <%= text_input f, :description %>
   <%= error_tag f, :description %>
 
+  <div class="form-group">
+    <%= inputs_for f, :questions, fn q -> %>
+      <%= label q, :text %>
+      <%= text_input q, :text %>
+    <% end %>
+  </div>
+
+
   <%= submit "Save" %>
 </.form>
