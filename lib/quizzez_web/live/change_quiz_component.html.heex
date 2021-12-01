@@ -1,19 +1,46 @@
-<.form let={f} for={@changeset} phx-change="validate" phx-submit="save">
-  <%= label f, :title %>
-  <%= text_input f, :title %>
-  <%= error_tag f, :title %>
+<div class="form-wrapper w-3/5">
+  <.form let={quiz} for={@changeset} phx-change="validate" phx-submit="save">
+    <div class="form-group flex flex-col">
+      <h3>Quiz info: </h3>
 
-  <%= label f, :description %>
-  <%= text_input f, :description %>
-  <%= error_tag f, :description %>
+      <%= label quiz, :title %>
+      <%= text_input quiz, :title %>
+      <%= error_tag quiz, :title %>
 
-  <div class="form-group">
-    <%= inputs_for f, :questions, fn q -> %>
-      <%= label q, :text %>
-      <%= text_input q, :text %>
-    <% end %>
-  </div>
+      <%= label quiz, :description %>
+      <%= textarea quiz, :description %>
+      <%= error_tag quiz, :description %>
+    </div>
+
+    <%= inputs_for quiz, :questions, fn question -> %>
+        <div class="form-group flex flex-col">
+          <h3>Question info: </h3>
+          <%= label question, :text %>
+          <%= text_input question, :text %>
+          <%= error_tag question, :text %>
+    
+          <div class="form-group flex flex-col">
+            <h3>Answer info:</h3>
+
+            <div class="input-group flex flex-row flex-wrap">
+              <%= inputs_for question, :answers, fn answer -> %>
+              <div class="input-field flex flex-row w-2/5">
+                <%= label answer, :text %>
+                <%= text_input answer, :text %>
+                <%= error_tag answer, :text %>
+                <%= label answer, "Is correct" %>
+                <%= checkbox answer, :is_correct %>
+              </div>
+              <% end %>
+            </div>
+
+          </div>
+
+        </div>
+    <% end %> 
 
 
-  <%= submit "Save" %>
-</.form>
+
+    <%= submit "Save" %>
+  </.form>
+</div>
