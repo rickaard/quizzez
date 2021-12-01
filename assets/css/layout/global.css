@@ -38,8 +38,26 @@ body {
 .justify-around {
   justify-content: space-around;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
 
 /* MISC */
 .text-center {
   text-align: left;
+}
+
+/* WIDTH */
+
+.w-1\/5 {
+  width: 20%;
+}
+.w-2\/5 {
+  width: 40%;
+}
+.w-3\/5 {
+  width: 60%;
+}
+.w-4\/5 {
+  width: 80%;
 }
