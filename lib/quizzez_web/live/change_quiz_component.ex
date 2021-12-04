@@ -8,17 +8,27 @@ defmodule QuizzezWeb.ChangeQuizComponent do
   # alias Quizzez.Repo
   alias Quizzez.Quizzes.Quiz
   alias Quizzez.Quizzes.Question
+  alias Quizzez.Quizzes.Answer
   alias Quizzez.Quizzes
 
   def mount(_params, _session, socket) do
     changeset =
       Quizzes.change_quiz(%Quiz{
         questions: [
-          %Question{}
+          %Question{
+            answers: [
+              %Answer{},
+              %Answer{}
+            ]
+          },
+          %Question{
+            answers: [
+              %Answer{},
+              %Answer{}
+            ]
+          }
         ]
       })
-
-    IO.inspect(changeset, label: "mount changeset")
 
     {:ok, assign(socket, %{changeset: changeset})}
   end
