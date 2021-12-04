@@ -41,6 +41,21 @@ body {
 .flex-wrap {
   flex-wrap: wrap;
 }
+.gap-xs {
+  gap: 0.25rem;
+}
+.gap-s {
+  gap: 0.5rem;
+}
+.gap-m {
+  gap: 1rem;
+}
+.gap-l {
+  gap: 2rem;
+}
+.gap-xl {
+  gap: 4rem;
+}
 
 /* MISC */
 .text-center {

@@ -22,16 +22,22 @@
           <div class="form-group flex flex-col">
             <h3>Answer info:</h3>
 
-            <div class="input-group flex flex-row flex-wrap">
-              <%= inputs_for question, :answers, fn answer -> %>
-              <div class="input-field flex flex-row w-2/5">
-                <%= label answer, :text %>
-                <%= text_input answer, :text %>
-                <%= error_tag answer, :text %>
-                <%= label answer, "Is correct" %>
-                <%= checkbox answer, :is_correct %>
+            <div class="input-group flex flex-row">
+              <div class="answer-group flex flex-row flex-wrap justify-between gap-l">
+                <%= inputs_for question, :answers, fn answer -> %>
+                  <div class="input-field flex flex-row w-2/5">
+                    <div class="flex flex-col">
+                      <%= label answer, :text %>
+                      <%= text_input answer, :text %>
+                      <%= error_tag answer, :text %>
+                    </div>
+                    <div class="flex flex-col">
+                      <%= label answer, "Is correct" %>
+                      <%= checkbox answer, :is_correct %>
+                    </div>
+                  </div>
+                <% end %>
               </div>
-              <% end %>
             </div>
 
           </div>
