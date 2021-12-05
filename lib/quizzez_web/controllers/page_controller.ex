@@ -2,12 +2,12 @@ defmodule QuizzezWeb.PageController do
   use QuizzezWeb, :controller
 
   alias Quizzez.Quizzes
-
   alias Quizzez.Quizzes.Quiz
+
+  plug QuizzezWeb.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete]
 
   def index(conn, _params) do
     all_quizzes = Quizzes.list_quizzes_with_questions()
-    IO.inspect(all_quizzes, label: "quizzes")
 
     render(conn, "index.html", quizzes: all_quizzes)
   end
@@ -18,7 +18,7 @@ defmodule QuizzezWeb.PageController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, params) do
+  def create(conn, _params) do
     changeset = Quiz.changeset(%Quiz{}, %{})
 
     render(conn, "new.html", changeset: changeset)

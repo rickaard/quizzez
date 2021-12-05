@@ -50,6 +50,8 @@ defmodule Quizzez.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
+      {:oauth2, "~> 2.0"},
+      {:ueberauth, "~> 0.6"},
       {:ueberauth_google, "~> 0.10"}
     ]
   end
