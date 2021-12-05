@@ -8,10 +8,20 @@ defmodule QuizzezWeb.Router do
     plug :put_root_layout, {QuizzezWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug QuizzezWeb.Plugs.SetUser
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  scope "/auth", QuizzezWeb do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    post "/:provider/callback", AuthController, :callback
+    delete("/logout", AuthController, :sign_out)
   end
 
   scope "/", QuizzezWeb do

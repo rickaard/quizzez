@@ -49,7 +49,7 @@ config :phoenix, :json_library, Jason
 
 config :ueberauth, Ueberauth,
   providers: [
-    google: {Ueberauth.Strategy.Google, []}
+    google: {Ueberauth.Strategy.Google, [default_score: "email profile"]}
   ]
 
 # Import environment specific config. This must remain at the bottom

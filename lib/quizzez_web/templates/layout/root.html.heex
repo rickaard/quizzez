@@ -19,8 +19,15 @@
             </a>
           </div>
           <ul class="header-nav__items">
-            <li><a href="/">Register</a></li>
-            <li><a href="/">Login</a></li>
+            <%= if @conn.assigns[:user] do %>
+            <li>
+              <%= link "Logout", to: Routes.auth_path(@conn, :sign_out), method: :delete %>
+            </li>
+            <% else %>
+              <li>
+                <%= link "Login", to: Routes.auth_path(@conn, :request, "google") %>
+              </li>
+            <% end %>
           </ul>
         </nav>
       </section>
