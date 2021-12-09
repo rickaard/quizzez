@@ -1,0 +1,16 @@
+<section class="hero">
+  <h1>All quizzez</h1>
+</section>
+
+<section class="row">
+  <article class="column">
+    <%= for quiz <- @quizzes do %>
+      <h3>Title: <%= quiz.title %></h3>
+      <h5>Made by: <%= quiz.user.name %></h5>
+      <p>Description: <%= quiz.description %></p>
+      <p>Amount of questions: <%= Enum.count(quiz.questions) %></p>
+    <% end %>
+  </article>
+  <article class="column">
+  </article>
+</section>
