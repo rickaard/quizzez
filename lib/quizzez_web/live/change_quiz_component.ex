@@ -53,6 +53,22 @@ defmodule QuizzezWeb.ChangeQuizComponent do
     end
   end
 
+  def handle_event("add_question", _params, socket) do
+    {:noreply, socket}
+  end
+
+  def handle_event("add_answer", _params, socket) do
+    {:noreply, socket}
+  end
+
+  def handle_event("remove_question", _params, socket) do
+    {:noreply, socket}
+  end
+
+  def handle_event("remove_answer", _params, socket) do
+    {:noreply, socket}
+  end
+
   defp empty_full_quiz do
     Quizzes.change_quiz(%Quiz{
       questions: [
