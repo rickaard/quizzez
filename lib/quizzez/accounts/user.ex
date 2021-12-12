@@ -9,7 +9,7 @@ defmodule Quizzez.Accounts.User do
 
     timestamps()
 
-    has_many :quiz, Quizzez.Quizzes.Quiz
+    has_many :quizzes, Quizzez.Quizzes.Quiz
   end
 
   @doc false
