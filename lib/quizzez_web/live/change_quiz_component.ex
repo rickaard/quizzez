@@ -58,6 +58,17 @@ defmodule QuizzezWeb.ChangeQuizComponent do
   end
 
   def handle_event("add_answer", _params, socket) do
+    # quiz = Map.from_struct(socket.assigns.changeset.data)
+
+    # changeset =
+    #   quiz
+    #   |> Map.update!(:questions, fn question ->
+    #     question
+    #     |> Enum.map(&transform_to_map(&1))
+    #   end)
+
+    # IO.inspect(changeset, label: "changeset")
+
     {:noreply, socket}
   end
 
@@ -83,4 +94,8 @@ defmodule QuizzezWeb.ChangeQuizComponent do
       ]
     })
   end
+
+  defp transform_to_map(%{__struct__: _} = struct), do: Map.from_struct(struct)
+  defp transform_to_map(map) when is_map(map), do: map
+  defp transform_to_map(other), do: other
 end
