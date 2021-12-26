@@ -9,3 +9,6 @@
 
 @import "./phoenix.css";
 @import "./pheonix-liveview.css";
+
+/* COMPONENTS */
+@import "./components/change_quiz.css";

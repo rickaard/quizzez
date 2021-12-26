@@ -13,7 +13,7 @@
     </div>
 
     <%= inputs_for quiz, :questions, fn question -> %>
-        <div class="form-group flex flex-col">
+        <div class="form-group flex flex-col question">
           <h3>Question info: </h3>
           <%= label question, :text %>
           <%= text_input question, :text %>
@@ -23,7 +23,7 @@
             <h3>Answer info:</h3>
 
             <div class="input-group flex flex-row">
-              <div class="answer-group flex flex-row flex-wrap justify-between gap-l">
+              <div class="answers-group flex flex-row flex-wrap justify-between gap-l">
                 <%= inputs_for question, :answers, fn answer -> %>
                   <div class="input-field flex flex-row w-2/5">
                     <div class="flex flex-col">
@@ -32,7 +32,7 @@
                       <%= error_tag answer, :text %>
                     </div>
                     <div class="flex flex-col">
-                      <%= label answer, "Is correct" %>
+                      <%= label answer, :is_correct %>
                       <%= checkbox answer, :is_correct %>
                     </div>
                   </div>
@@ -41,12 +41,12 @@
             </div>
 
           </div>
-
+        <%# <button type="button" phx-click="add_answer" phx-value-question-id={question.id}>Add answer</button> %>
         </div>
     <% end %> 
 
 
-
+    <button type="button" phx-click="add_question">Add question</button>
     <%= submit "Save" %>
   </.form>
 </div>
