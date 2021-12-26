@@ -127,6 +127,8 @@ defmodule QuizzezWeb.ChangeQuizComponent do
         %Question{
           answers: [
             %Answer{},
+            %Answer{},
+            %Answer{},
             %Answer{}
           ]
         }
