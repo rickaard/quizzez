@@ -27,9 +27,7 @@ defmodule QuizzezWeb.ChangeQuizComponent do
     {:ok, socket}
   end
 
-  def handle_event("validate", %{"quiz" => quiz_params} = params, socket) do
-    IO.inspect(params, label: "params")
-
+  def handle_event("validate", %{"quiz" => quiz_params} = _params, socket) do
     changeset =
       %Quiz{}
       |> Quizzes.change_quiz(quiz_params)
@@ -62,55 +60,45 @@ defmodule QuizzezWeb.ChangeQuizComponent do
   end
 
   def handle_event("add_question", _params, socket) do
-    existing_questions =
-      Map.get(
-        socket.assigns.changeset.changes,
-        :questions,
-        socket.assigns.changeset.data.questions
-      )
+    quiz_changeset = socket.assigns.changeset
 
-    # answer = Quizzes.change_answer(%Answer{})
-
-    questions =
-      existing_questions
-      |> Enum.concat([
-        %Question{
-          answers: [%Answer{}, %Answer{}]
-          # answers: [answer, answer]
-        }
-      ])
+    updated_questions =
+      quiz_changeset
+      |> Ecto.Changeset.get_field(:questions)
+      |> Enum.concat([%Question{answers: [%Answer{}, %Answer{}]}])
 
     changeset =
-      socket.assigns.changeset
-      |> Ecto.Changeset.put_assoc(:questions, questions)
+      quiz_changeset
+      |> Ecto.Changeset.put_assoc(:questions, updated_questions)
+      |> IO.inspect(label: "CHANGESET ADD_QUESTION")
 
     {:noreply, assign(socket, changeset: changeset)}
   end
 
   def handle_event("add_answer", %{"question-id" => "quiz_questions_" <> index} = _params, socket) do
-    # index = String.to_integer(index)
+    quiz_changeset = socket.assigns.changeset
+    {question_index, _} = Integer.parse(index)
 
-    # existing_questions =
-    #   Map.get(
-    #     socket.assigns.changeset.changes,
-    #     :questions,
-    #     socket.assigns.changeset.data.questions
-    #   )
-    #   |> IO.inspect(label: "existing_questions")
+    all_questions =
+      quiz_changeset
+      |> Ecto.Changeset.get_field(:questions)
 
-    # updated_questions =
-    #   existing_questions
-    #   |> List.update_at(index, fn question ->
-    #     question
-    #     |> Map.update!(:answers, &(&1 ++ Quizzes.change_answer(%Answer{})))
-    #   end)
+    {_prev, updated_question} =
+      all_questions
+      |> Enum.fetch!(question_index)
+      |> Map.get_and_update(:answers, fn answers_list ->
+        {answers_list, answers_list ++ [%Answer{}]}
+      end)
 
-    # changeset =
-    #   socket.assigns.changeset
-    #   |> Ecto.Changeset.put_assoc(:questions, updated_questions)
+    updated_questions =
+      all_questions
+      |> List.replace_at(question_index, updated_question)
 
-    # {:noreply, assign(socket, changeset: changeset)}
-    {:noreply, socket}
+    changeset =
+      quiz_changeset
+      |> Ecto.Changeset.put_assoc(:questions, updated_questions)
+
+    {:noreply, assign(socket, changeset: changeset)}
   end
 
   def handle_event("remove_question", _params, socket) do
@@ -136,9 +124,8 @@ defmodule QuizzezWeb.ChangeQuizComponent do
     }
   end
 
-  defp transform_to_map(%{__struct__: _} = struct), do: Map.from_struct(struct)
-  defp transform_to_map(map) when is_map(map), do: map
-  defp transform_to_map(other), do: other
-
-  defp get_temp_id, do: :crypto.strong_rand_bytes(5) |> Base.url_encode64() |> binary_part(0, 5)
+  # defp transform_to_map(%{__struct__: _} = struct), do: Map.from_struct(struct)
+  # defp transform_to_map(map) when is_map(map), do: map
+  # defp transform_to_map(other), do: other
+  # defp get_temp_id, do: :crypto.strong_rand_bytes(5) |> Base.url_encode64() |> binary_part(0, 5)
 end
