@@ -70,7 +70,6 @@ defmodule QuizzezWeb.ChangeQuizComponent do
     changeset =
       quiz_changeset
       |> Ecto.Changeset.put_assoc(:questions, updated_questions)
-      |> IO.inspect(label: "CHANGESET ADD_QUESTION")
 
     {:noreply, assign(socket, changeset: changeset)}
   end
