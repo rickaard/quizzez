@@ -1,52 +1,58 @@
-<div class="form-wrapper w-3/5">
+<div class="form-wrapper w-4/5 mb-4">
   <.form let={quiz} for={@changeset} phx-change="validate" phx-submit="save">
-    <div class="form-group flex flex-col">
-      <h3>Quiz info: </h3>
+    <div class="form-group">
 
-      <%= label quiz, :title %>
-      <%= text_input quiz, :title %>
-      <%= error_tag quiz, :title %>
+      <header class="form-group__heading flex">
+        <h4>Quiz Info</h4>
+        <div class="action">
+            <%= submit "Save", class: "btn primary", title: "Save the quiz" %>
+        </div>
+      </header>
 
-      <%= label quiz, :description %>
-      <%= textarea quiz, :description %>
-      <%= error_tag quiz, :description %>
+      <div class="form-group__body">
+        <div class="item">
+          <%= text_input quiz, :title, placeholder: "Enter a title for the quiz" %>
+          <%= error_tag quiz, :title %>
+        </div>
+        <div class="item">
+          <%= textarea quiz, :description, placeholder: "Enter a description for the quiz" %>
+          <%= error_tag quiz, :description %>
+        </div>
+      </div>
+
     </div>
 
     <%= inputs_for quiz, :questions, fn question -> %>
-        <div class="form-group flex flex-col question">
-          <h3>Question info: </h3>
-          <%= label question, :text %>
-          <%= text_input question, :text %>
-          <%= error_tag question, :text %>
-    
-          <div class="form-group flex flex-col">
-            <h3>Answer info:</h3>
+        <div class="form-group question">
 
-            <div class="input-group flex flex-row">
-              <div class="answers-group flex flex-row flex-wrap justify-between gap-l">
-                <%= inputs_for question, :answers, fn answer -> %>
-                  <div class="input-field flex flex-row w-2/5">
-                    <div class="flex flex-col">
-                      <%= label answer, :text %>
-                      <%= text_input answer, :text %>
-                      <%= error_tag answer, :text %>
-                    </div>
-                    <div class="flex flex-col">
-                      <%= label answer, :is_correct %>
-                      <%= checkbox answer, :is_correct %>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
+          <header class="form-group__heading flex">
+            <h4>Question #<%= question_number(question) %></h4>
+            <div class="action"></div>
+          </header>
+
+          <div class="form-group__body">
+
+            <div class="item mb-2">
+              <%= textarea question, :text, placeholder: "Enter the question" %>
+              <%= error_tag question, :text %>
             </div>
 
+            <%= inputs_for question, :answers, fn answer -> %>
+              <div class="item">
+                <%= text_input answer, :text, placeholder: "Enter an answer", phx_debounce: "blur" %>
+                <%= error_tag answer, :text %>
+                <%= checkbox answer, :is_correct, title: "Mark as correct answer" %>
+                <button type="button" phx-click="remove_answer" phx-value-answer-id={answer.id} class="remove-answer icon-btn" title="Delete answer">✖</button>
+              </div>
+            <% end %>
+
+            <button class="btn" type="button" phx-click="add_answer" phx-value-question-id={question.id}>Add another answer</button>
+            
           </div>
-        <button type="button" phx-click="add_answer" phx-value-question-id={question.id}>Add answer</button>
         </div>
     <% end %> 
-
-
-    <button type="button" phx-click="add_question">Add question</button>
-    <%= submit "Save" %>
+    <div class="flex flex-end">
+      <button type="button" class="btn" phx-click="add_question" title="Add another question">✚</button>
+    </div>
   </.form>
 </div>
