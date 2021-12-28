@@ -123,6 +123,14 @@ defmodule QuizzezWeb.ChangeQuizComponent do
     }
   end
 
+  defp question_number(question) do
+    "quiz_questions_" <> index = question.id
+
+    {number, _} = Integer.parse(index)
+
+    Integer.to_string(number + 1)
+  end
+
   # defp transform_to_map(%{__struct__: _} = struct), do: Map.from_struct(struct)
   # defp transform_to_map(map) when is_map(map), do: map
   # defp transform_to_map(other), do: other
