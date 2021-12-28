@@ -8,9 +8,37 @@
 
 body {
   color: #000000;
-  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  font-size: 1.6em;
+  font-family: "Montserrat", sans-serif;
   line-height: 1.6;
+  background-color: var(--color-light-silver);
+}
+
+.btn {
+  display: inline-block;
+  height: 26px;
+  line-height: 25px;
+  padding: 0 12px;
+  font-weight: 600;
+  font-family: inherit;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  background: var(--color-white);
+  border: 1px solid var(--color-silver);
+  border-radius: 4px;
+  box-shadow: var(--drop-shadow);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.06, 0.67, 0.37, 0.99);
+}
+.btn.primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn:not(:disabled):hover {
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+  box-shadow: var(--drop-shadow-lower);
 }
 
 /* FLEXBOX */
@@ -22,6 +50,9 @@ body {
 }
 .flex-row {
   flex-direction: row;
+}
+.flex-end {
+  justify-content: flex-end;
 }
 .justify-items-center {
   justify-items: center;
@@ -84,4 +115,48 @@ body {
 }
 .w-4\/5 {
   width: 80%;
+}
+
+/* MARGINS */
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
 }
