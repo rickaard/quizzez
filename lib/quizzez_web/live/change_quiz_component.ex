@@ -100,11 +100,24 @@ defmodule QuizzezWeb.ChangeQuizComponent do
     {:noreply, assign(socket, changeset: changeset)}
   end
 
-  def handle_event("remove_question", _params, socket) do
+  def handle_event("remove_question", params, socket) do
+    %{"question-id" => "quiz_questions_" <> index} = params
+
+    IO.puts("")
+    IO.puts("Reming question with index: #{index}")
+    IO.puts("")
+
     {:noreply, socket}
   end
 
-  def handle_event("remove_answer", _params, socket) do
+  def handle_event("remove_answer", %{"answer-id" => answer_params} = _parmas, socket) do
+    [_, _, question_index, _, answer_index] = String.split(answer_params, "_")
+
+    IO.puts("")
+    IO.puts("Removing answer with index: #{answer_index}")
+    IO.puts("From question with index: #{question_index}")
+    IO.puts("")
+
     {:noreply, socket}
   end
 
