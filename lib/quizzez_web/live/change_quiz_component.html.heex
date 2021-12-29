@@ -1,7 +1,6 @@
 <div class="form-wrapper w-4/5 mb-4">
   <.form let={quiz} for={@changeset} phx-change="validate" phx-submit="save">
     <div class="form-group">
-
       <header class="form-group__heading flex">
         <h4>Quiz Info</h4>
         <div class="action">
@@ -11,12 +10,10 @@
 
       <div class="form-group__body">
         <div class="item">
-          <%= text_input quiz, :title, placeholder: "Enter a title for the quiz" %>
-          <%= error_tag quiz, :title %>
+          <%= text_input quiz, :title, placeholder: "Enter a title for the quiz", phx_debounce: "blur" %>
         </div>
         <div class="item">
-          <%= textarea quiz, :description, placeholder: "Enter a description for the quiz" %>
-          <%= error_tag quiz, :description %>
+          <%= textarea quiz, :description, placeholder: "Enter a description for the quiz", phx_debounce: "blur" %>
         </div>
       </div>
 
@@ -27,22 +24,22 @@
 
           <header class="form-group__heading flex">
             <h4>Question #<%= question_number(question) %></h4>
-            <div class="action"></div>
+            <div class="action">
+              <button type="button" phx-click="remove_question" phx-value-question-id={question.id} class="remove-btn icon-btn" title="Delete question">✖</button>
+            </div>
           </header>
 
           <div class="form-group__body">
 
             <div class="item mb-2">
-              <%= textarea question, :text, placeholder: "Enter the question" %>
-              <%= error_tag question, :text %>
+              <%= textarea question, :text, placeholder: "Enter the question", phx_debounce: "blur" %>
             </div>
 
             <%= inputs_for question, :answers, fn answer -> %>
               <div class="item">
                 <%= text_input answer, :text, placeholder: "Enter an answer", phx_debounce: "blur" %>
-                <%= error_tag answer, :text %>
                 <%= checkbox answer, :is_correct, title: "Mark as correct answer" %>
-                <button type="button" phx-click="remove_answer" phx-value-answer-id={answer.id} class="remove-answer icon-btn" title="Delete answer">✖</button>
+                <button type="button" phx-click="remove_answer" phx-value-answer-id={answer.id} class="remove-btn icon-btn" title="Delete answer">✖</button>
               </div>
             <% end %>
 
