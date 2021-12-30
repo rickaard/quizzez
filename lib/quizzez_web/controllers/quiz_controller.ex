@@ -23,10 +23,4 @@ defmodule QuizzezWeb.QuizController do
 
     render(conn, "new.html", changeset: changeset)
   end
-
-  # def create(conn, _params) do
-  #   changeset = Quiz.changeset(%Quiz{}, %{})
-
-  #   render(conn, "new.html", changeset: changeset)
-  # end
 end

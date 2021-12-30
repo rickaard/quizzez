@@ -143,9 +143,4 @@ defmodule QuizzezWeb.ChangeQuizComponent do
 
     Integer.to_string(number + 1)
   end
-
-  # defp transform_to_map(%{__struct__: _} = struct), do: Map.from_struct(struct)
-  # defp transform_to_map(map) when is_map(map), do: map
-  # defp transform_to_map(other), do: other
-  # defp get_temp_id, do: :crypto.strong_rand_bytes(5) |> Base.url_encode64() |> binary_part(0, 5)
 end
