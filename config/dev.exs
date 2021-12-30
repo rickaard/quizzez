@@ -25,7 +25,8 @@ config :quizzez, QuizzezWeb.Endpoint,
   secret_key_base: "c+CDXJXpG6aOSUE4/MPGID2OOKwdi/tNoonUhSzfw8s+n3G4L/wxX0La/nqkFDnR",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support

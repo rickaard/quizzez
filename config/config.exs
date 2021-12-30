@@ -52,6 +52,17 @@ config :ueberauth, Ueberauth,
     google: {Ueberauth.Strategy.Google, [default_score: "email profile"]}
   ]
 
+config :tailwind,
+  version: "3.0.7",
+  default: [
+    args: ~w(
+      --config=tailwind.config.js
+      --input=../priv/static/assets/app.css
+      --output=../priv/static/assets/compiled.css
+    ),
+    cd: Path.expand("../assets", __DIR__)
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
