@@ -2,13 +2,14 @@
 // https://tailwindcss.com/docs/configuration
 module.exports = {
   content: [
-    "./js/**/*.js",
-    "../lib/*_web.ex",
-    "../lib/*_web/**/*.*ex",
-    "../lib/*_web/**/*.*heex",
+    './js/**/*.js',
+    '../lib/*_web.ex',
+    '../lib/*_web/**/*.*ex'
   ],
   theme: {
     extend: {},
   },
-  plugins: [require("@tailwindcss/forms")],
-};
+  plugins: [
+    require('@tailwindcss/forms')
+  ]
+}
