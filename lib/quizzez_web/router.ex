@@ -28,6 +28,7 @@ defmodule QuizzezWeb.Router do
     pipe_through(:browser)
 
     resources("/quiz", QuizController)
+    resources("/profile", ProfileController, only: ~w[show update]a)
     resources("/", PageController)
   end
 
