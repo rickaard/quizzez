@@ -4,6 +4,7 @@ defmodule QuizzezWeb.AuthController do
   alias Quizzez.Accounts.User
   alias Quizzez.Repo
 
+  plug(QuizzezWeb.Plugs.RedirectIfAuthenticated when action not in ~w[sign_out]a)
   plug Ueberauth
 
   def callback(%{assigns: %{ueberauth_auth: %{info: user_info}}} = conn, %{"provider" => "google"}) do
