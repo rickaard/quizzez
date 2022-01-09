@@ -8,7 +8,11 @@ module.exports = {
     "../lib/*_web/**/*.*heex",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#635994",
+      },
+    },
   },
   plugins: [require("@tailwindcss/forms")],
 };
