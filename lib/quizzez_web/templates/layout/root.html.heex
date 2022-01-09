@@ -21,9 +21,12 @@
           </div>
           <ul class="header-nav__items">
             <%= if @conn.assigns[:user] do %>
-            <li>
-              <%= link "Logout", to: Routes.auth_path(@conn, :sign_out), method: :delete %>
-            </li>
+              <li>
+                <%= link "Profile", to: Routes.profile_path(@conn, :show, @conn.assigns[:user].id) %>
+              </li>
+              <li>
+                <%= link "Logout", to: Routes.auth_path(@conn, :sign_out), method: :delete %>
+              </li>
             <% else %>
               <li>
                 <%= link "Login", to: Routes.auth_path(@conn, :request, "google") %>
