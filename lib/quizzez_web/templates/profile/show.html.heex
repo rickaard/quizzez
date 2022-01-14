@@ -18,7 +18,7 @@
       </div>
     </article>
 
-    <article class="flex flex-row my-6 w-full max-w-3xl bg-primary bg-opacity-10 text-primary p-4 justify-between items-center rounded-lg">
+    <article class="flex flex-row my-6 w-full max-w-3xl bg-primary bg-opacity-10 text-primary p-4 justify-between items-center rounded-lg shadow-md">
       <div class="text-sm">
         <h6 class="font-bold">Create new quiz</h6>
         <%= if length(@user.quizzes) >= 1 do %>
@@ -32,4 +32,22 @@
       </div>
     </article>
 
+</section>
+
+<section class="container my-6 px-4 mx-auto max-w-3xl">
+  <h4 class="font-bold text-primary text-2xl">Your created quizzes</h4>
+  <section class="flex flex-row flex-wrap gap-6 justify-between mt-2">
+    <%= for quiz <- @user.quizzes do %>
+      <article class="flex flex-col border-[1px] border-solid border-x-gray-200 w-[48%] relative rounded-lg">
+        <header class="flex flex-row justify-between bg-primary bg-opacity-10 p-4">
+          <h6 class="font-bold text-primary"><%= quiz.title %></h6>
+        </header>
+        <p class="min-h-[80px] flex-grow my-2 px-4"><%= quiz.description %></p>
+        <div class="flex justify-between p-4">
+          <p>Edit</p>
+          <p>Delete</p>
+        </div>
+      </article>
+    <% end %>
+  </section>
 </section>
