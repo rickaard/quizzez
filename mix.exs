@@ -53,7 +53,8 @@ defmodule Quizzez.MixProject do
       {:oauth2, "~> 2.0"},
       {:ueberauth, "~> 0.6"},
       {:ueberauth_google, "~> 0.10"},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:ex_machina, "~> 2.7.0", only: :test}
     ]
   end
 
