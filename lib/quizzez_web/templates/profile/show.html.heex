@@ -1,0 +1,46 @@
+<section class="container mt-20 px-6 mx-auto flex flex-col max-w-4xl">
+    <h2 class="font-bold text-3xl text-primary"><%= "Hi #{@user.name}, welcome to your profile" %></h2>
+
+    <article class="flex flex-row gap-4 mt-6 w-full max-w-3xl">
+      <div class="flex flex-col flex-1 justify-between">
+        <h5>Quizzes created</h5>
+        <p class="text-primary font-bold"><%= length(@user.quizzes) %></p>
+      </div>
+      <div class="flex flex-col flex-1 justify-between">
+        <h5>Active since</h5>
+        <p class="text-primary font-bold"><%= Date.to_iso8601(@user.inserted_at) %></p>
+      </div>
+    </article>
+
+    <article class="flex my-6 items-center justify-center w-full ">
+      <div class="max-w-xs">
+        <img class="w-72" src={Routes.static_path(@conn, "/images/profile-illustration.svg")} alt=""/>
+      </div>
+    </article>
+
+    <article class="flex flex-col sm:flex-row my-6 w-full bg-primary bg-opacity-10 text-primary p-4 justify-between items-center rounded-lg shadow-md">
+      <div class="text-sm w-full sm:w-max">
+        <h6 class="font-bold">Create new quiz</h6>
+        <%= if length(@user.quizzes) >= 1 do %>
+          <p>You currently have <span class="font-bold"><%= length(@user.quizzes) %></span> created <%= quiz_plural_text(@user.quizzes) %>. Go ahead and create more!</p>
+          <% else %>
+          <p>You have no created quizzes. Go ahead and create one!</p>
+        <% end %>
+      </div>
+      <div class="w-full sm:w-max">
+        <%= link "Create quiz", to: Routes.quiz_path(@conn, :new), class: "w-full mt-2 sm:mt-0 inline-block bg-primary text-white py-2 sm:py-4 px-4 sm:ml-2 text-sm rounded-lg shadow-md text-center after:content-['→'] after:ml-2 hover:scale-105" %>
+      </div>
+    </article>
+
+</section>
+
+<%= if length(@user.quizzes) >= 1 do %>
+  <section class="container mt-20 mb-8 px-6 mx-auto max-w-4xl">
+    <h4 class="font-bold text-primary text-2xl">Your created quizzes</h4>
+    <section class="flex flex-row flex-wrap gap-8 justify-between mt-6">
+      <%= for quiz <- @user.quizzes do %>
+        <QuizzezWeb.Components.QuizDetailCard.card quiz={quiz} can_modify={true}/>
+      <% end %>
+    </section>
+  </section>
+<% end %>

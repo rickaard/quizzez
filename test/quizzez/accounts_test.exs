@@ -35,7 +35,12 @@ defmodule Quizzez.AccountsTest do
 
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
-      update_attrs = %{email: "some updated email", name: "some updated name", provider: "some updated provider"}
+
+      update_attrs = %{
+        email: "some updated email",
+        name: "some updated name",
+        provider: "some updated provider"
+      }
 
       assert {:ok, %User{} = user} = Accounts.update_user(user, update_attrs)
       assert user.email == "some updated email"

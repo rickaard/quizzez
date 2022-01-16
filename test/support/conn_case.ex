@@ -23,6 +23,7 @@ defmodule QuizzezWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import QuizzezWeb.ConnCase
+      import QuizzezWeb.Factories
 
       alias QuizzezWeb.Router.Helpers, as: Routes
 
@@ -35,5 +36,11 @@ defmodule QuizzezWeb.ConnCase do
     pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Quizzez.Repo, shared: not tags[:async])
     on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
+  end
+
+  def log_in_user(conn, user) do
+    conn
+    |> Phoenix.ConnTest.init_test_session(%{})
+    |> Plug.Conn.put_session(:user_id, user.id)
   end
 end

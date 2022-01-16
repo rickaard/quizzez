@@ -11,8 +11,8 @@
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
   <body>
-    <header class="main-header">
-      <section class="container">
+    <header class="main-header px-8">
+      <section class="container mx-auto max-w-4xl">
         <nav class="header-nav">
           <div class="header-logo">
             <a href="/">
@@ -21,9 +21,12 @@
           </div>
           <ul class="header-nav__items">
             <%= if @conn.assigns[:user] do %>
-            <li>
-              <%= link "Logout", to: Routes.auth_path(@conn, :sign_out), method: :delete %>
-            </li>
+              <li>
+                <%= link "Profile", to: Routes.profile_path(@conn, :show, @conn.assigns[:user].id) %>
+              </li>
+              <li>
+                <%= link "Logout", to: Routes.auth_path(@conn, :sign_out), method: :delete %>
+              </li>
             <% else %>
               <li>
                 <%= link "Login", to: Routes.auth_path(@conn, :request, "google") %>
