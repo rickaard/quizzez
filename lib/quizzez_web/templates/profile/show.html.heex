@@ -22,7 +22,7 @@
       <div class="text-sm w-full sm:w-max">
         <h6 class="font-bold">Create new quiz</h6>
         <%= if length(@user.quizzes) >= 1 do %>
-          <p>You currently have <span class="font-bold"><%= length(@user.quizzes) %></span> created quizzes. Go ahead and create more!</p>
+          <p>You currently have <span class="font-bold"><%= length(@user.quizzes) %></span> created <%= quiz_plural_text(@user.quizzes) %>. Go ahead and create more!</p>
           <% else %>
           <p>You have no created quizzes. Go ahead and create one!</p>
         <% end %>
