@@ -35,10 +35,8 @@ defmodule QuizzezWeb.AuthController do
     case insert_or_get_user(changeset) do
       {:ok, user} ->
         conn
-        |> put_flash(:info, "Welcome!")
         |> put_session(:user_id, user.id)
-        # Change this to Profile page
-        |> redirect(to: Routes.page_path(conn, :index))
+        |> redirect(to: Routes.profile_path(conn, :show, user.id))
 
       {:error, _reason} ->
         conn
