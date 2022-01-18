@@ -5,12 +5,11 @@ defmodule Quizzez.Quizzes.Quiz do
   schema "quizzes" do
     field :description, :string
     field :title, :string
-    field :user_id, :id
 
     timestamps()
 
     has_many :questions, Quizzez.Quizzes.Question, on_delete: :delete_all, on_replace: :delete
-    belongs_to :user, Quizzez.Accounts.User, define_field: false
+    belongs_to :user, Quizzez.Accounts.User
   end
 
   @doc false

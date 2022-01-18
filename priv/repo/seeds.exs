@@ -14,6 +14,7 @@ alias Quizzez.Repo
 
 alias Quizzez.Accounts.User
 alias Quizzez.Quizzes.Quiz
+alias Quizzez.Accounts
 
 ##### USERS #####
 user_1 =
@@ -22,15 +23,6 @@ user_1 =
     name: "Admin",
     provider: "Google"
   })
-
-user_2 =
-  Repo.insert!(%User{
-    email: "johndoe@example.com",
-    name: "John Doe",
-    provider: "Google"
-  })
-
-##### USERS #####
 
 ##### FIRST QUIZ #####
 quiz_1_question_1_answer_1 = %{text: "2020", is_correct: false}
@@ -84,5 +76,3 @@ Repo.insert!(%Quiz{
   ],
   user: user_1
 })
-
-##### FIRST QUIZ #####

@@ -5,11 +5,10 @@ defmodule Quizzez.Quizzes.Answer do
   schema "answers" do
     field :is_correct, :boolean, default: false
     field :text, :string
-    field :question_id, :id
 
     timestamps()
 
-    belongs_to :question, Quizzez.Quizzes.Question, define_field: false
+    belongs_to :question, Quizzez.Quizzes.Question
   end
 
   @doc false
