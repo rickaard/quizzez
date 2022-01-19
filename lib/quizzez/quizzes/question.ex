@@ -1,5 +1,5 @@
 defmodule Quizzez.Quizzes.Question do
-  use Ecto.Schema
+  use Quizzez.Schema
   import Ecto.Changeset
 
   schema "questions" do
