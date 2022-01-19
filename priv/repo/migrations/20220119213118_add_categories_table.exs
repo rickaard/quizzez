@@ -6,7 +6,7 @@ defmodule Quizzez.Repo.Migrations.AddCategoriesTable do
       add :id, :binary_id, primary_key: true, null: false
       add :name, :string, null: false
 
-      add :quiz_id, references(:quizzes, type: :binary_id)
+      timestamps()
     end
   end
 end
