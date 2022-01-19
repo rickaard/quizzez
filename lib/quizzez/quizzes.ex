@@ -6,6 +6,7 @@ defmodule Quizzez.Quizzes do
   import Ecto.Query, warn: false
   alias Quizzez.Repo
 
+  alias Quizzez.Quizzes.Categories
   alias Quizzez.Quizzes.Quiz
   alias Quizzez.Quizzes.Question
   alias Quizzez.Quizzes.Answer
@@ -56,6 +57,12 @@ defmodule Quizzez.Quizzes do
   def create_full_quiz(attrs \\ %{}) do
     %Quiz{}
     |> Quiz.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def create_category(params \\ %{}) do
+    %Categories{}
+    |> Categories.changeset(params)
     |> Repo.insert()
   end
 
