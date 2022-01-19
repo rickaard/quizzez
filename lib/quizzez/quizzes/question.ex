@@ -1,15 +1,14 @@
 defmodule Quizzez.Quizzes.Question do
-  use Ecto.Schema
+  use Quizzez.Schema
   import Ecto.Changeset
 
   schema "questions" do
     field :text, :string
-    field :quiz_id, :id
 
     timestamps()
 
     has_many :answers, Quizzez.Quizzes.Answer, on_delete: :delete_all, on_replace: :delete
-    belongs_to :quiz, Quizzez.Quizzes.Quiz, define_field: false
+    belongs_to :quiz, Quizzez.Quizzes.Quiz
   end
 
   @doc false

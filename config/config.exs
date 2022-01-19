@@ -8,7 +8,8 @@
 import Config
 
 config :quizzez,
-  ecto_repos: [Quizzez.Repo]
+  ecto_repos: [Quizzez.Repo],
+  generators: [binary_id: true]
 
 # Configures the endpoint
 config :quizzez, QuizzezWeb.Endpoint,

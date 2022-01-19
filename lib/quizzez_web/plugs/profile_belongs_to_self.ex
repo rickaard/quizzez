@@ -8,7 +8,7 @@ defmodule QuizzezWeb.Plugs.ProfileBelongsToSelf do
   end
 
   def call(conn, _params) do
-    profile_id = conn.path_params["id"] |> String.to_integer()
+    profile_id = conn.path_params["id"]
     user = conn.assigns[:user]
 
     if profile_id == user.id do
