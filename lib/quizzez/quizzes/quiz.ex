@@ -10,7 +10,7 @@ defmodule Quizzez.Quizzes.Quiz do
 
     has_many :questions, Quizzez.Quizzes.Question, on_delete: :delete_all, on_replace: :delete
     belongs_to :user, Quizzez.Accounts.User
-    belongs_to :category, Quizzez.Quizzes.Categories
+    belongs_to :category, Quizzez.Quizzes.Category
   end
 
   @doc false

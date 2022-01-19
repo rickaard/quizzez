@@ -1,4 +1,4 @@
-defmodule Quizzez.Quizzes.Categories do
+defmodule Quizzez.Quizzes.Category do
   use Quizzez.Schema
   import Ecto.Changeset
 

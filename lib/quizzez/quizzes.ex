@@ -6,7 +6,7 @@ defmodule Quizzez.Quizzes do
   import Ecto.Query, warn: false
   alias Quizzez.Repo
 
-  alias Quizzez.Quizzes.Categories
+  alias Quizzez.Quizzes.Category
   alias Quizzez.Quizzes.Quiz
   alias Quizzez.Quizzes.Question
   alias Quizzez.Quizzes.Answer
@@ -61,9 +61,25 @@ defmodule Quizzez.Quizzes do
   end
 
   def create_category(params \\ %{}) do
-    %Categories{}
-    |> Categories.changeset(params)
+    %Category{}
+    |> Category.changeset(params)
     |> Repo.insert()
+  end
+
+  @doc """
+  Returns a %Categories{} or nil if non is found by that name
+
+  ## Examples
+
+    iex> category_by_name("misc")
+    %Categories{}
+
+    iex> category_by_name("misc")
+    nil
+  """
+  def get_category_by_name(name) when is_binary(name) do
+    Category
+    |> Repo.get_by(name: name)
   end
 
   @doc """
