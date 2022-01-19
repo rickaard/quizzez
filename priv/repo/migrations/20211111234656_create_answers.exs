@@ -3,7 +3,7 @@ defmodule Quizzez.Repo.Migrations.CreateAnswers do
 
   def change do
     create table(:answers, primary_key: false) do
-      add :id, :binary_id, primary_key: true
+      add :id, :binary_id, primary_key: true, null: false
       add :text, :string
       add :is_correct, :boolean, default: false, null: false
 

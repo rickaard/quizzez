@@ -14,7 +14,6 @@ alias Quizzez.Repo
 
 alias Quizzez.Accounts.User
 alias Quizzez.Quizzes.Quiz
-alias Quizzez.Accounts
 
 ##### USERS #####
 user_1 =
@@ -25,44 +24,31 @@ user_1 =
   })
 
 ##### FIRST QUIZ #####
-quiz_1_question_1_answer_1 = %{text: "2020", is_correct: false}
-quiz_1_question_1_answer_2 = %{text: "2010", is_correct: false}
-quiz_1_question_1_answer_3 = %{text: "2000", is_correct: false}
-quiz_1_question_1_answer_4 = %{text: "2012", is_correct: true}
-
-quiz_1_question_2_answer_1 = %{text: "Object Oriented Programming", is_correct: false}
-quiz_1_question_2_answer_2 = %{text: "Functional Programming", is_correct: true}
-
-quiz_1_question_3_answer_1 = %{text: "PostgreSQL", is_correct: true}
-quiz_1_question_3_answer_2 = %{text: "MySQL", is_correct: false}
-quiz_1_question_3_answer_3 = %{text: "MongoDB", is_correct: false}
-quiz_1_question_3_answer_4 = %{text: "MSSQL", is_correct: false}
-
 quiz_1_question_1 = %{
   text: "When did Elixir get created?",
   answers: [
-    quiz_1_question_1_answer_1,
-    quiz_1_question_1_answer_2,
-    quiz_1_question_1_answer_3,
-    quiz_1_question_1_answer_4
+    %{text: "2020", is_correct: false},
+    %{text: "2010", is_correct: false},
+    %{text: "2000", is_correct: false},
+    %{text: "2012", is_correct: true}
   ]
 }
 
 quiz_1_question_2 = %{
   text: "What kind of programming model is Elixir using?",
   answers: [
-    quiz_1_question_2_answer_1,
-    quiz_1_question_2_answer_2
+    %{text: "Object Oriented Programming", is_correct: false},
+    %{text: "Functional Programming", is_correct: true}
   ]
 }
 
 quiz_1_question_3 = %{
   text: "What kind of database is often used with Pheonix?",
   answers: [
-    quiz_1_question_3_answer_1,
-    quiz_1_question_3_answer_2,
-    quiz_1_question_3_answer_3,
-    quiz_1_question_3_answer_4
+    %{text: "PostgreSQL", is_correct: true},
+    %{text: "MySQL", is_correct: false},
+    %{text: "MongoDB", is_correct: false},
+    %{text: "MSSQL", is_correct: false}
   ]
 }
 

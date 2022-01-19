@@ -5,7 +5,7 @@ defmodule Quizzez.Repo.Migrations.CreateUsers do
     execute "CREATE EXTENSION IF NOT EXISTS citext", ""
 
     create table(:users, primary_key: false) do
-      add :id, :binary_id, primary_key: true
+      add :id, :binary_id, primary_key: true, null: false
       add :name, :string
       add :provider, :string
       add :email, :citext, null: false

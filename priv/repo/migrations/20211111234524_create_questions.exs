@@ -3,7 +3,7 @@ defmodule Quizzez.Repo.Migrations.CreateQuestions do
 
   def change do
     create table(:questions, primary_key: false) do
-      add :id, :binary_id, primary_key: true
+      add :id, :binary_id, primary_key: true, null: false
       add :text, :string
       add :is_correct, :boolean, default: false, null: false
       add :quiz_id, references(:quizzes, type: :binary_id, on_delete: :delete_all), null: false
