@@ -9,7 +9,7 @@ defmodule QuizzezWeb.Components.QuizDetailCard do
     <article class="flex flex-row border border-solid border-x-gray-200 w-full lg:w-[48%] relative rounded-lg">
 
       <aside class="absolute w-full -top-2">
-        <p class="bg-primary-50 text-white px-2 text-sm text-center w-max mx-auto">Misc</p>
+        <p class="bg-primary-50 text-white px-2 text-sm text-center w-max mx-auto"><%= @quiz.category.name %></p>
       </aside>
 
       <%= if @can_modify do %>
@@ -22,7 +22,7 @@ defmodule QuizzezWeb.Components.QuizDetailCard do
 
       <div class="h-full py-2 px-2">
         <div class="h-full min-w-[130px] flex items-center bg-primary bg-opacity-10 rounded-lg">
-          <img class="" src={Routes.static_path(QuizzezWeb.Endpoint, quiz_illustration_path("misc"))} alt=""/>
+          <img class="" src={Routes.static_path(QuizzezWeb.Endpoint, quiz_illustration_path(@quiz.category.name))} alt=""/>
         </div>
       </div>
 

@@ -8,7 +8,7 @@ defmodule QuizzezWeb.ProfileController do
   plug(QuizzezWeb.Plugs.ProfileBelongsToSelf when action in ~w[show update]a)
 
   def show(conn, %{"id" => user_id} = _params) do
-    user = Repo.get(User, user_id) |> Repo.preload(quizzes: :questions)
+    user = Repo.get(User, user_id) |> Repo.preload(quizzes: [:questions, :category])
 
     case user do
       user = %User{} ->
