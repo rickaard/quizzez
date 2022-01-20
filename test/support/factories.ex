@@ -21,7 +21,14 @@ defmodule QuizzezWeb.Factories do
 
   def question_factory do
     %Quizzes.Question{
-      text: sequence(:title, &"What is question #{&1}?")
+      text: sequence(:text, &"What is question #{&1}?"),
+      quiz: build(:quiz)
+    }
+  end
+
+  def category_factory do
+    %Quizzes.Category{
+      name: sequence(:name, &"Category #{&1}")
     }
   end
 end
