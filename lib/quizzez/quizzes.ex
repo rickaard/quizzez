@@ -82,6 +82,10 @@ defmodule Quizzez.Quizzes do
     |> Repo.get_by(name: name)
   end
 
+  def list_categories do
+    Repo.all(Category)
+  end
+
   @doc """
   Gets a single quiz.
 
