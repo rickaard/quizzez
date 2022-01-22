@@ -18,8 +18,8 @@ defmodule Quizzez.Quizzes.Quiz do
   @doc false
   def changeset(quiz, attrs) do
     quiz
-    |> cast(attrs, [:title, :description])
-    |> validate_required([:title, :description])
+    |> cast(attrs, [:title, :description, :category])
+    |> validate_required([:title, :description, :category])
     |> validate_inclusion(:category, @categories)
     |> cast_assoc(:questions, required: true)
   end

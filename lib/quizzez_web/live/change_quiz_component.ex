@@ -12,6 +12,8 @@ defmodule QuizzezWeb.ChangeQuizComponent do
   alias Quizzez.Quizzes.Answer
   alias Quizzez.Quizzes
 
+  # alias QuizzezWeb.SVGHelpers
+
   def mount(_params, %{"user_id" => user_id} = _session, socket) do
     quiz = empty_full_quiz()
 
