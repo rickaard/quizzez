@@ -1,6 +1,8 @@
 defmodule Quizzez.Quizzes do
   @moduledoc """
   The Quizzes context.
+
+  A collection of functions related to quizzes
   """
 
   import Ecto.Query, warn: false
@@ -8,7 +10,6 @@ defmodule Quizzez.Quizzes do
 
   alias Quizzez.Quizzes.Quiz
   alias Quizzez.Quizzes.Question
-  alias Quizzez.Quizzes.Answer
 
   @doc """
   Returns the list of quizzes.
@@ -23,42 +24,97 @@ defmodule Quizzez.Quizzes do
     Repo.all(Quiz)
   end
 
+  @doc """
+  Returns a list of quizzes with related questions preloaded
+
+  Examples
+
+    iex> list_quizzes_with_questions()
+    [%Quiz{questions: [%Question{}, ...]}, ...]
+  """
   def list_quizzes_with_questions do
     Quiz
     |> Repo.all()
-    |> Repo.preload([:questions, :user])
+    |> Repo.preload(:questions)
   end
 
+  @doc """
+  Returns a list of quizzes with related questions preloaded aswell as related answers preloaded to the questions
+
+  Examples
+
+    iex> list_quizzes_with_questions_and_answers()
+    [
+      %Quiz{
+        questions: [
+          %Question{
+            answers: [
+              %Answer{},
+              ...
+            ]
+          },
+          ...
+        ]
+      },
+    ...]
+  """
   def list_quizzes_with_questions_and_answers do
     Quiz
     |> Repo.all()
     |> Repo.preload(questions: :answers)
   end
 
+  @doc """
+  Returns a list of questions with answers preloaded
+
+  Examples
+
+    iex> list_questions_with_answers()
+    [%Question{answers: [%Answers{}, ...]}, ...]
+  """
   def list_questions_with_answers do
     Question
     |> Repo.all()
     |> Repo.preload([:answers])
   end
 
+  @doc """
+  Gets a single quiz with questions and answers preloaded
+
+  Returns `nil` if no quiz with that ID is found
+
+  Examples
+
+    iex> get_quiz_with_questions_and_answers("a-valid-binary-id")
+    %Quiz{}
+
+    iex> get_quiz_with_questions_and_answers("a-valid-binary-id")
+    nil
+  """
   def get_quiz_with_questions_and_answers(id) do
     Quiz
-    |> Repo.get!(id)
+    |> Repo.get(id)
     |> Repo.preload(questions: :answers)
   end
 
+  @doc """
+  Gets a single question with answers preloaded
+
+  Returns `nil` if no question with that ID is found
+
+  Examples
+
+    iex> get_question_with_answers("a-valid-binary-id")
+    %Question{}
+
+    iex> get_question_with_answers("a-valid-binary-id")
+    nil
+  """
   def get_question_with_answers(id) do
     Question
-    |> Repo.get!(id)
+    |> Repo.get(id)
     |> Repo.preload(:answers)
   end
-
-  def create_full_quiz(attrs \\ %{}) do
-    %Quiz{}
-    |> Quiz.changeset(attrs)
-    |> Repo.insert()
-  end
-
 
   @doc """
   Gets a single quiz.
@@ -130,21 +186,6 @@ defmodule Quizzez.Quizzes do
   end
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking quiz changes.
-
-  ## Examples
-
-      iex> change_quiz(quiz)
-      %Ecto.Changeset{data: %Quiz{}}
-
-  """
-  def change_quiz(%Quiz{} = quiz, attrs \\ %{}) do
-    Quiz.changeset(quiz, attrs)
-  end
-
-  alias Quizzez.Quizzes.Question
-
-  @doc """
   Returns the list of questions.
 
   ## Examples
@@ -155,184 +196,5 @@ defmodule Quizzez.Quizzes do
   """
   def list_questions do
     Repo.all(Question)
-  end
-
-  @doc """
-  Gets a single question.
-
-  Raises `Ecto.NoResultsError` if the Question does not exist.
-
-  ## Examples
-
-      iex> get_question!(123)
-      %Question{}
-
-      iex> get_question!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_question!(id), do: Repo.get!(Question, id)
-
-  @doc """
-  Creates a question.
-
-  ## Examples
-
-      iex> create_question(%{field: value})
-      {:ok, %Question{}}
-
-      iex> create_question(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_question(attrs \\ %{}) do
-    %Question{}
-    # |> Ecto.build_assoc(:answers)
-    |> Question.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  @doc """
-  Updates a question.
-
-  ## Examples
-
-      iex> update_question(question, %{field: new_value})
-      {:ok, %Question{}}
-
-      iex> update_question(question, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_question(%Question{} = question, attrs) do
-    question
-    # |> Ecto.build_assoc(:answers)
-    |> Question.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a question.
-
-  ## Examples
-
-      iex> delete_question(question)
-      {:ok, %Question{}}
-
-      iex> delete_question(question)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_question(%Question{} = question) do
-    Repo.delete(question)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking question changes.
-
-  ## Examples
-
-      iex> change_question(question)
-      %Ecto.Changeset{data: %Question{}}
-
-  """
-  def change_question(%Question{} = question, attrs \\ %{}) do
-    Question.changeset(question, attrs)
-  end
-
-  alias Quizzez.Quizzes.Answer
-
-  @doc """
-  Returns the list of answers.
-
-  ## Examples
-
-      iex> list_answers()
-      [%Answer{}, ...]
-
-  """
-  def list_answers do
-    Repo.all(Answer)
-  end
-
-  @doc """
-  Gets a single answer.
-
-  Raises `Ecto.NoResultsError` if the Answer does not exist.
-
-  ## Examples
-
-      iex> get_answer!(123)
-      %Answer{}
-
-      iex> get_answer!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_answer!(id), do: Repo.get!(Answer, id)
-
-  @doc """
-  Creates a answer.
-
-  ## Examples
-
-      iex> create_answer(%{field: value})
-      {:ok, %Answer{}}
-
-      iex> create_answer(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_answer(attrs \\ %{}) do
-    %Answer{}
-    |> Answer.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  @doc """
-  Updates a answer.
-
-  ## Examples
-
-      iex> update_answer(answer, %{field: new_value})
-      {:ok, %Answer{}}
-
-      iex> update_answer(answer, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_answer(%Answer{} = answer, attrs) do
-    answer
-    |> Answer.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a answer.
-
-  ## Examples
-
-      iex> delete_answer(answer)
-      {:ok, %Answer{}}
-
-      iex> delete_answer(answer)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_answer(%Answer{} = answer) do
-    Repo.delete(answer)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking answer changes.
-
-  ## Examples
-
-      iex> change_answer(answer)
-      %Ecto.Changeset{data: %Answer{}}
-
-  """
-  def change_answer(%Answer{} = answer, attrs \\ %{}) do
-    Answer.changeset(answer, attrs)
   end
 end

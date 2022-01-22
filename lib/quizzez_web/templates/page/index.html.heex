@@ -5,7 +5,6 @@
   <article class="column">
     <%= for quiz <- @quizzes do %>
       <h3>Title: <%= quiz.title %></h3>
-      <h5>Made by: <%= quiz.user.name %></h5>
       <p>Description: <%= quiz.description %></p>
       <p>Amount of questions: <%= Enum.count(quiz.questions) %></p>
     <% end %>
