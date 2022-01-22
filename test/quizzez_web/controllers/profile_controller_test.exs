@@ -9,12 +9,12 @@ defmodule QuizzezWeb.ProfileControllerTest do
 
     test "redirects to own profile page when trying to visit someone elses profile", %{conn: conn} do
       user = insert(:user)
-      other_user_id = user.id + 1
+      user_2 = insert(:user)
 
       conn =
         conn
         |> log_in_user(user)
-        |> get(Routes.profile_path(conn, :show, other_user_id))
+        |> get(Routes.profile_path(conn, :show, user_2.id))
 
       assert redirected_to(conn, 302) == Routes.profile_path(conn, :show, user.id)
     end
@@ -37,7 +37,7 @@ defmodule QuizzezWeb.ProfileControllerTest do
 
     test "shows amount of quizzes created on profile page", %{conn: conn} do
       user = insert(:user)
-      insert(:quiz, user: user)
+      insert(:quiz, user: user, category: "misc")
 
       conn =
         conn
@@ -53,15 +53,16 @@ defmodule QuizzezWeb.ProfileControllerTest do
     test "shows quiz details for created quizzes", %{conn: conn} do
       user = insert(:user)
 
-      question = insert(:question)
+      quiz =
+        insert(
+          :quiz,
+          user: user,
+          title: "Elixir quiz",
+          description: "A small and simple quiz about Elixir",
+          category: "programming"
+        )
 
-      insert(
-        :quiz,
-        user: user,
-        questions: [question],
-        title: "Elixir quiz",
-        description: "A small and simple quiz about Elixir"
-      )
+      insert(:question, quiz: quiz)
 
       conn =
         conn
@@ -72,6 +73,7 @@ defmodule QuizzezWeb.ProfileControllerTest do
       assert response =~ "Elixir quiz"
       assert response =~ "A small and simple quiz about Elixir"
       assert response =~ "1 question"
+      assert response =~ "programming"
     end
   end
 end

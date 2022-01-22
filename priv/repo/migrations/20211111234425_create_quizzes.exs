@@ -6,6 +6,7 @@ defmodule Quizzez.Repo.Migrations.CreateQuizzes do
       add :id, :binary_id, primary_key: true, null: false
       add :title, :string
       add :description, :string
+      add :category, :string
       add :user_id, references(:users, type: :binary_id, on_delete: :nothing), null: false
 
       timestamps()

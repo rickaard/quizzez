@@ -1,10 +1,12 @@
+<% categories = ~w[food geography history math misc music programming science workout] %>
+
 <div class="form-wrapper w-4/5 mb-4">
   <.form let={quiz} for={@changeset} phx-change="validate" phx-submit="save">
     <div class="form-group">
       <header class="form-group__heading flex">
         <h4>Quiz Info</h4>
         <div class="action">
-            <%= submit "Save", class: "btn primary", title: "Save the quiz" %>
+            <%= submit "Save quiz", class: "btn primary", title: "Save the quiz" %>
         </div>
       </header>
 
@@ -15,6 +17,20 @@
         <div class="item">
           <%= textarea quiz, :description, placeholder: "Enter a description for the quiz", phx_debounce: "blur" %>
         </div>
+
+        <div class="">
+          <h6 class="text-sm mb-1 text-primary">Quiz category:</h6>
+          <div class="item flex-wrap mb-0 text-gray-500 ">
+            <%= for category <- categories do %>
+              <%= label class: "border border-solid py-2 px-2 max-w-xs flex gap-2 cursor-pointer hover:bg-primary hover:text-white text-sm rounded-lg items-center #{if category == @selected_category, do: "bg-primary text-white", else: nil }" do %>
+                <%= SVGHelpers.inline_svg(category) %>
+                <%= category %>
+                <%= radio_button quiz, :category, category, class: "hidden" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
       </div>
 
     </div>

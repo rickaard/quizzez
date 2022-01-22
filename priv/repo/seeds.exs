@@ -55,6 +55,7 @@ quiz_1_question_3 = %{
 Repo.insert!(%Quiz{
   title: "Elixir Quiz",
   description: "A little quix about Elixir and Pheonix",
+  category: "misc",
   questions: [
     quiz_1_question_1,
     quiz_1_question_2,
