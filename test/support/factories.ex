@@ -15,7 +15,8 @@ defmodule QuizzezWeb.Factories do
   def quiz_factory do
     %Quizzes.Quiz{
       title: sequence(:title, &"Quiz-#{&1} title"),
-      description: "Quiz description"
+      description: "Quiz description",
+      category: "misc"
     }
   end
 
@@ -26,9 +27,4 @@ defmodule QuizzezWeb.Factories do
     }
   end
 
-  def category_factory do
-    %Quizzes.Category{
-      name: "misc"
-    }
-  end
 end

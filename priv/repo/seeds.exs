@@ -14,7 +14,6 @@ alias Quizzez.Repo
 
 alias Quizzez.Accounts.User
 alias Quizzez.Quizzes.Quiz
-alias Quizzez.Quizzes
 
 ##### USERS #####
 user_1 =
@@ -23,10 +22,6 @@ user_1 =
     name: "Admin",
     provider: "Google"
   })
-
-categories = ~w[misc food geography history math music programming science workout]
-Enum.each(categories, &Quizzes.create_category(%{name: &1}))
-misc_category = Quizzes.get_category_by_name("misc")
 
 ##### FIRST QUIZ #####
 quiz_1_question_1 = %{
@@ -60,11 +55,11 @@ quiz_1_question_3 = %{
 Repo.insert!(%Quiz{
   title: "Elixir Quiz",
   description: "A little quix about Elixir and Pheonix",
+  category: "misc",
   questions: [
     quiz_1_question_1,
     quiz_1_question_2,
     quiz_1_question_3
   ],
-  user: user_1,
-  category: misc_category
+  user: user_1
 })

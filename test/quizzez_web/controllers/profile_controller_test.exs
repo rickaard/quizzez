@@ -37,7 +37,7 @@ defmodule QuizzezWeb.ProfileControllerTest do
 
     test "shows amount of quizzes created on profile page", %{conn: conn} do
       user = insert(:user)
-      insert(:quiz, user: user, category: build(:category))
+      insert(:quiz, user: user, category: "misc")
 
       conn =
         conn
@@ -53,21 +53,16 @@ defmodule QuizzezWeb.ProfileControllerTest do
     test "shows quiz details for created quizzes", %{conn: conn} do
       user = insert(:user)
 
-      category = insert(:category, name: "programming")
-
       quiz =
         insert(
           :quiz,
           user: user,
           title: "Elixir quiz",
           description: "A small and simple quiz about Elixir",
-          category: category
+          category: "programming"
         )
 
       insert(:question, quiz: quiz)
-
-      require IEx
-      IEx.pry()
 
       conn =
         conn
