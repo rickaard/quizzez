@@ -50,8 +50,20 @@ config :phoenix, :json_library, Jason
 
 config :ueberauth, Ueberauth,
   providers: [
-    google: {Ueberauth.Strategy.Google, [default_scope: "email profile"]}
+    google: {Ueberauth.Strategy.Google, [default_scope: "email profile"]},
+    identity:
+      {Ueberauth.Strategy.Identity,
+       [
+         callback_methods: ["POST"],
+         param_nesting: "user",
+         request_path: "/register",
+         callback_path: "register"
+       ]}
   ]
+
+config :quizzez, QuizzezWeb.Authentication,
+  issuer: "quizzez",
+  secret_key: System.get_env("GUARDIAN_SECRET_KEY")
 
 config :tailwind,
   version: "3.0.7",
