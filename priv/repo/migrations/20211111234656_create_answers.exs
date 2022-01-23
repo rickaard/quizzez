@@ -7,8 +7,7 @@ defmodule Quizzez.Repo.Migrations.CreateAnswers do
       add :text, :string
       add :is_correct, :boolean, default: false, null: false
 
-      add :question_id, references(:questions, type: :binary_id, on_delete: :delete_all),
-        null: false
+      add :question_id, references(:questions, type: :binary_id, on_delete: :delete_all)
 
       timestamps()
     end
