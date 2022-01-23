@@ -1,4 +1,12 @@
 defmodule QuizzezWeb.SVGHelpers do
+  @moduledoc """
+  Helper function to inline SVG's in the view
+
+  SVG's should be places in assets/static/svg
+  and should be used in your templates like so:
+  <%= SVGHelpers.inline_svg("name_on_svg_file") %>
+
+  """
   def inline_svg(file_name) do
     path = static_path(file_name)
 

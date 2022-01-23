@@ -1,4 +1,7 @@
 defmodule QuizzezWeb.Plugs.SetUser do
+  @moduledoc """
+  Plug to set either the current logged in user to `conn` or nil
+  """
   use Phoenix.Controller
 
   alias Quizzez.Repo

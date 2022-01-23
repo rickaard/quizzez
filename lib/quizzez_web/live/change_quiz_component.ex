@@ -1,4 +1,5 @@
 defmodule QuizzezWeb.ChangeQuizComponent do
+  @moduledoc false
   import QuizzezWeb.ErrorHelpers
 
   # use Phoenix.LiveComponent

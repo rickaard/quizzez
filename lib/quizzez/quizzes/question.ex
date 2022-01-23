@@ -1,4 +1,5 @@
 defmodule Quizzez.Quizzes.Question do
+  @moduledoc false
   use Quizzez.Schema
   import Ecto.Changeset
 

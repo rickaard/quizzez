@@ -1,4 +1,7 @@
 defmodule QuizzezWeb.Components.QuizDetailCard do
+  @moduledoc """
+  A card component to be used to show details about a Quiz
+  """
   use Phoenix.Component
   alias QuizzezWeb.Router.Helpers, as: Routes
 

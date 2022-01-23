@@ -1,4 +1,9 @@
 defmodule QuizzezWeb.Plugs.ProfileBelongsToSelf do
+  @moduledoc """
+  Plug that checks if the current logged in user is trying to
+  reach a profile page that belongs to himself/herself or else redirect
+  back to own profile page
+  """
   import Plug.Conn
   import Phoenix.Controller
 

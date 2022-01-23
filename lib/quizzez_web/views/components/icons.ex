@@ -1,4 +1,5 @@
 defmodule QuizzezWeb.Components.Icons do
+  @moduledoc false
   use Phoenix.Component
 
   def more_icon(assigns) do

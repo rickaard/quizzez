@@ -1,4 +1,7 @@
 defmodule QuizzezWeb.Factories do
+  @moduledoc """
+  Factories for schemas to be used in tests
+  """
   use ExMachina.Ecto, repo: Quizzez.Repo
 
   alias Quizzez.Accounts
