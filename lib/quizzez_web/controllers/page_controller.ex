@@ -2,7 +2,6 @@ defmodule QuizzezWeb.PageController do
   use QuizzezWeb, :controller
 
   alias Quizzez.Quizzes
-  alias Quizzez.Quizzes.Quiz
 
   plug(QuizzezWeb.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete])
 
