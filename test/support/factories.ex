@@ -22,9 +22,13 @@ defmodule QuizzezWeb.Factories do
 
   def question_factory do
     %Quizzes.Question{
-      text: sequence(:text, &"What is question #{&1}?"),
-      quiz: build(:quiz)
+      text: sequence(:text, &"What is question #{&1}?")
     }
   end
 
+  def answer_factory do
+    %Quizzes.Answer{
+      text: sequence(:text, &"This is answer #{&1}?")
+    }
+  end
 end
