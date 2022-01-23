@@ -24,6 +24,7 @@ defmodule Quizzez.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Quizzez.DataCase
+      import QuizzezWeb.Factories
     end
   end
 

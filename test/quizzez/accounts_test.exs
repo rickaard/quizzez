@@ -2,21 +2,19 @@ defmodule Quizzez.AccountsTest do
   use Quizzez.DataCase
 
   alias Quizzez.Accounts
+  alias Quizzez.Accounts.User
+  alias Quizzez.Quizzes
 
   describe "users" do
-    alias Quizzez.Accounts.User
-
-    import Quizzez.AccountsFixtures
-
     @invalid_attrs %{email: nil, name: nil, provider: nil}
 
     test "list_users/0 returns all users" do
-      user = user_fixture()
+      user = insert(:user)
       assert Accounts.list_users() == [user]
     end
 
     test "get_user!/1 returns the user with given id" do
-      user = user_fixture()
+      user = insert(:user)
       assert Accounts.get_user!(user.id) == user
     end
 
@@ -34,7 +32,7 @@ defmodule Quizzez.AccountsTest do
     end
 
     test "update_user/2 with valid data updates the user" do
-      user = user_fixture()
+      user = insert(:user)
 
       update_attrs = %{
         email: "some updated email",
@@ -49,20 +47,24 @@ defmodule Quizzez.AccountsTest do
     end
 
     test "update_user/2 with invalid data returns error changeset" do
-      user = user_fixture()
+      user = insert(:user)
       assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, @invalid_attrs)
       assert user == Accounts.get_user!(user.id)
     end
 
     test "delete_user/1 deletes the user" do
-      user = user_fixture()
+      user = insert(:user)
       assert {:ok, %User{}} = Accounts.delete_user(user)
       assert_raise Ecto.NoResultsError, fn -> Accounts.get_user!(user.id) end
     end
 
-    test "change_user/1 returns a user changeset" do
-      user = user_fixture()
-      assert %Ecto.Changeset{} = Accounts.change_user(user)
+    test "deleting a user also deletes created quizzes by that user" do
+      user = insert(:user)
+      quiz = insert(:quiz, user: user)
+      assert {:ok, %User{}} = Accounts.delete_user(user)
+
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_user!(user.id) end
+      assert_raise Ecto.NoResultsError, fn -> Quizzes.get_quiz!(quiz.id) end
     end
   end
 end

@@ -61,7 +61,7 @@ defmodule Quizzez.Quizzes do
   def list_quizzes_with_questions_and_answers do
     Quiz
     |> Repo.all()
-    |> Repo.preload(questions: :answers)
+    |> Repo.preload(:user, questions: :answers)
   end
 
   @doc """
@@ -196,5 +196,15 @@ defmodule Quizzez.Quizzes do
   """
   def list_questions do
     Repo.all(Question)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking quiz changes.
+  ## Examples
+      iex> change_quiz(quiz)
+      %Ecto.Changeset{data: %Quiz{}}
+  """
+  def change_quiz(%Quiz{} = quiz, attrs \\ %{}) do
+    Quiz.changeset(quiz, attrs)
   end
 end
