@@ -7,11 +7,11 @@ defmodule QuizzezWeb.AuthController do
   plug(QuizzezWeb.Plugs.RedirectIfAuthenticated when action not in ~w[sign_out]a)
   plug Ueberauth
 
-  def callback(%{assigns: %{ueberauth_auth: %{info: user_info}}} = conn, %{"provider" => "google"}) do
+  def callback(%{assigns: %{ueberauth_auth: %{info: user_info}}} = conn, %{"provider" => provider}) do
     user_params = %{
       email: user_info.email,
       name: user_info.name || "Anonymous",
-      provider: "google"
+      provider: provider || "unknown"
     }
 
     changeset = User.changeset(%User{}, user_params)
