@@ -1,4 +1,8 @@
 defmodule QuizzezWeb.Plugs.RedirectIfAuthenticated do
+  @moduledoc """
+  Plug to make sure a logged in user is not able to visit pages
+  where you can't be logged in, e.g login page
+  """
   import Plug.Conn
   import Phoenix.Controller
 

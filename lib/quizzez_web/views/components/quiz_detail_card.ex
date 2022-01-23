@@ -1,4 +1,7 @@
 defmodule QuizzezWeb.Components.QuizDetailCard do
+  @moduledoc """
+  A card component to be used to show details about a Quiz
+  """
   use Phoenix.Component
   alias QuizzezWeb.Router.Helpers, as: Routes
 
@@ -56,7 +59,7 @@ defmodule QuizzezWeb.Components.QuizDetailCard do
     "#{length(question_list)} questions"
   end
 
-  defp questions_text(question_list) when length(question_list) == 0 do
+  defp questions_text(question_list) when question_list == [] do
     "0 questions"
   end
 

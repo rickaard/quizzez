@@ -1,4 +1,7 @@
 defmodule QuizzezWeb.Plugs.SetUser do
+  @moduledoc """
+  Plug to set either the current logged in user to `conn` or nil
+  """
   use Phoenix.Controller
 
   alias Quizzez.Repo
@@ -10,12 +13,10 @@ defmodule QuizzezWeb.Plugs.SetUser do
   def call(conn, _params) do
     user_id = get_session(conn, :user_id)
 
-    cond do
-      user = user_id && Repo.get(User, user_id) ->
-        assign(conn, :user, user)
-
-      true ->
-        assign(conn, :user, nil)
+    if user = user_id && Repo.get(User, user_id) do
+      assign(conn, :user, user)
+    else
+      assign(conn, :user, nil)
     end
   end
 end

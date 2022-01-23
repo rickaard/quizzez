@@ -1,4 +1,5 @@
 defmodule QuizzezWeb.Components.Blobs do
+  @moduledoc false
   use Phoenix.Component
 
   def purple(assigns) do

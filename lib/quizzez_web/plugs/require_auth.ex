@@ -1,4 +1,10 @@
 defmodule QuizzezWeb.Plugs.RequireAuth do
+  @moduledoc """
+  Plug to see if a user exists on the `conn`
+  or redirect to homepage
+
+  Used to protect pages where a user must be logged in
+  """
   import Plug.Conn
   import Phoenix.Controller
 
