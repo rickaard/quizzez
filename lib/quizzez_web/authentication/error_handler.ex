@@ -1,4 +1,7 @@
 defmodule QuizzezWeb.Authentication.ErrorHandler do
+  @moduledoc """
+  Module that handles auth_errors, i.e when authentication is not successfull
+  """
   use QuizzezWeb, :controller
 
   @behaviour Guardian.Plug.ErrorHandler

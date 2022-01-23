@@ -1,4 +1,7 @@
 defmodule QuizzezWeb.Authentication.Pipeline do
+  @moduledoc """
+  Plug to handle authentication with the help from `Guardian`
+  """
   use Guardian.Plug.Pipeline,
     otp_app: :quizzez,
     error_handler: QuizzezWeb.Authentication.ErrorHandler,
