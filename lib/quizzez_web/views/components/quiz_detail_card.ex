@@ -56,7 +56,7 @@ defmodule QuizzezWeb.Components.QuizDetailCard do
     "#{length(question_list)} questions"
   end
 
-  defp questions_text(question_list) when length(question_list) == 0 do
+  defp questions_text(question_list) when question_list == [] do
     "0 questions"
   end
 
