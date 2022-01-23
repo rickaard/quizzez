@@ -30,8 +30,18 @@ defmodule QuizzezWeb.ChangeQuizComponent do
     {:ok, socket}
   end
 
-  def handle_event("validate", %{"quiz" => %{"category" => category}}, socket) do
-    {:noreply, assign(socket, selected_category: category)}
+  def handle_event("validate", %{"quiz" => %{"category" => category} = quiz_params}, socket) do
+    changeset =
+      %Quiz{}
+      |> Quizzes.change_quiz(quiz_params)
+      |> Map.put(:action, :validate)
+
+    socket =
+      socket
+      |> assign(changeset: changeset)
+      |> assign(selected_category: category)
+
+    {:noreply, socket}
   end
 
   def handle_event("validate", %{"quiz" => quiz_params} = _params, socket) do
