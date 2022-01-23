@@ -1,0 +1,37 @@
+<div class="flex flex-col">
+  <div class="flex flex-col">
+    <h1>Register</h1>
+    <%= form_for @changeset, @action, [as: :user, class: "flex flex-col"], fn f -> %>
+      <%= label f, :email, "Email address" %>
+      <%= email_input f, :email %>
+      <%= error_tag f, :email %>
+
+      <%= label f, :name, "Your name" %>
+      <%= text_input f, :name %>
+      <%= error_tag f, :name %>
+
+      <%= label f, :password, "Password" %>
+      <%= password_input f, :password %>
+      <%= error_tag f, :password %>
+
+      <%= label f, :password_confirmation, "Password Confirmation" %>
+      <%= password_input f, :password_confirmation %>
+      <%= error_tag f, :password_confirmation %>
+
+      <%= submit "Register", class: "button button-primary" %>
+    <% end %>
+  </div>
+</div>
+<div class="flex flex-col">
+  <div class="flex flex-col">
+    <p>
+      Already have an account?
+      <%= link("Log in here", to: Routes.session_path(@conn, :new)) %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="flex flex-col">
+    <%= render(QuizzezWeb.SessionView, "social_links.html", assigns) %>
+  </div>
+</div>
