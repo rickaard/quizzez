@@ -19,31 +19,20 @@ defmodule Quizzez.AccountsTest do
     end
 
     test "create_user/1 with valid data creates a user" do
-      valid_attrs = %{email: "some email", name: "some name", provider: "some provider"}
+      valid_attrs = %{
+        email: "some email",
+        name: "some name",
+        password: "supersecretpassword",
+        password_confirmation: "supersecretpassword"
+      }
 
       assert {:ok, %User{} = user} = Accounts.create_user(valid_attrs)
       assert user.email == "some email"
       assert user.name == "some name"
-      assert user.provider == "some provider"
     end
 
     test "create_user/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Accounts.create_user(@invalid_attrs)
-    end
-
-    test "update_user/2 with valid data updates the user" do
-      user = insert(:user)
-
-      update_attrs = %{
-        email: "some updated email",
-        name: "some updated name",
-        provider: "some updated provider"
-      }
-
-      assert {:ok, %User{} = user} = Accounts.update_user(user, update_attrs)
-      assert user.email == "some updated email"
-      assert user.name == "some updated name"
-      assert user.provider == "some updated provider"
     end
 
     test "update_user/2 with invalid data returns error changeset" do

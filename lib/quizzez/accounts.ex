@@ -38,6 +38,21 @@ defmodule Quizzez.Accounts do
   def get_user!(id), do: Repo.get!(User, id)
 
   @doc """
+  Gets a single user.
+
+  Returns nil if no user is found
+
+  ## Examples
+
+      iex> get_user(123)
+      %User{}
+
+      iex> get_user(456)
+      nil
+  """
+  def get_user(id), do: Repo.get(User, id)
+
+  @doc """
   Creates a user.
 
   ## Examples
@@ -52,6 +67,18 @@ defmodule Quizzez.Accounts do
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def register(%Ueberauth.Auth.Info{} = user_params) do
+    %User{}
+    |> User.oauth_changeset(extract_user_params(user_params))
+    |> Repo.insert()
+  end
+
+  def register(user_params) do
+    %User{}
+    |> User.changeset(user_params)
     |> Repo.insert()
   end
 
@@ -87,5 +114,51 @@ defmodule Quizzez.Accounts do
   """
   def delete_user(%User{} = user) do
     Repo.delete(user)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking user changes.
+
+  ## Examples
+
+      iex> change_user(user)
+      %Ecto.Changeset{data: %User{}}
+
+  """
+  def change_user(user \\ %User{}, params \\ %{}) do
+    User.changeset(user, params)
+  end
+
+  @doc """
+  Gets a single user by email.
+
+  Returns nil if no user is found
+
+  ## Examples
+
+      iex> get_user("name@example.com")
+      %User{}
+
+      iex> get_user("notfound@example.com")
+      nil
+  """
+  def get_by_email(email) do
+    Repo.get_by(User, email: email)
+  end
+
+  def get_or_register(%Ueberauth.Auth.Info{email: email} = user_params) do
+    if user = get_by_email(email) do
+      {:ok, user}
+    else
+      register(user_params)
+    end
+  end
+
+  defp extract_user_params(%Ueberauth.Auth.Info{} = user_info, provider \\ "google") do
+    %{
+      email: user_info.email,
+      name: user_info.name || "Anonymous",
+      provider: provider
+    }
   end
 end
