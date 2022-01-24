@@ -63,7 +63,7 @@ config :ueberauth, Ueberauth,
 
 config :quizzez, QuizzezWeb.Authentication,
   issuer: "quizzez",
-  secret_key: System.get_env("GUARDIAN_SECRET_KEY")
+  secret_key: System.get_env("GUARDIAN_SECRET_KEY") || "mysupersecretkey"
 
 config :tailwind,
   version: "3.0.7",
