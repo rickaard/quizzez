@@ -16,7 +16,7 @@ defmodule QuizzezWeb.SessionController do
     end
   end
 
-  def create(conn, %{"account" => %{"email" => email, "password" => password}}) do
+  def create(conn, %{"user" => %{"email" => email, "password" => password}}) do
     with %User{} = user <- Accounts.get_by_email(email),
          {:ok, user} <- Authentication.authenticate(user, password) do
       conn
