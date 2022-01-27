@@ -31,6 +31,10 @@ defmodule QuizzezWeb.Authentication do
     __MODULE__.Plug.current_resource(conn)
   end
 
+  def authenticate(%User{provider: _}, _password) do
+    {:error, :invalid_strategy}
+  end
+
   def authenticate(%User{} = user, password) do
     authenticate(user, password, Argon2.verify_pass(password, user.encrypted_password))
   end

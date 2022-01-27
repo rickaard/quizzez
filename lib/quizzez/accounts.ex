@@ -88,7 +88,18 @@ defmodule Quizzez.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
+
+  def update_user(%User{provider: provider} = user, attrs) when not is_nil(provider) do
+    IO.puts("provider")
+
+    user
+    |> User.oauth_changeset(attrs)
+    |> Repo.update()
+  end
+
   def update_user(%User{} = user, attrs) do
+    IO.puts("not provider")
+
     user
     |> User.changeset(attrs)
     |> Repo.update()

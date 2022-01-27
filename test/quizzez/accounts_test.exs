@@ -41,6 +41,14 @@ defmodule Quizzez.AccountsTest do
       assert user == Accounts.get_user!(user.id)
     end
 
+    test "update_user/2 with valida data updates a user" do
+      user = insert(:user)
+
+      # assert {:ok, _user} = Accounts.update_user(user, %{name: "Updated name"})
+      assert {:ok, %User{} = user} = Accounts.update_user(user, %{name: "Updated name"})
+      assert user.name == "Updated name"
+    end
+
     test "delete_user/1 deletes the user" do
       user = insert(:user)
       assert {:ok, %User{}} = Accounts.delete_user(user)
@@ -59,11 +67,11 @@ defmodule Quizzez.AccountsTest do
     test "get_by_email/1 returns the user with given email" do
       user = insert(:user)
 
-      assert user = Accounts.get_by_email(user.email)
+      assert ^user = Accounts.get_by_email(user.email)
     end
 
     test "get_by_email/1 returns nil if no user is found with given email" do
-      user = insert(:user, email: "person@example.com")
+      insert(:user, email: "person@example.com")
 
       refute nil = Accounts.get_by_email("another_person@example.com")
     end

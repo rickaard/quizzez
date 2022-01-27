@@ -28,6 +28,14 @@ defmodule QuizzezWeb.SessionController do
         |> put_flash(:error, "Incorrect email or password")
         |> new(%{})
 
+      {:error, :invalid_strategy} ->
+        conn
+        |> put_flash(
+          :error,
+          "Your account was created with Google. Please use that login method."
+        )
+        |> new(%{})
+
       nil ->
         conn
         |> put_flash(:error, "Incorrect email or password")
