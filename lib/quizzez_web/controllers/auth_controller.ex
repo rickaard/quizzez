@@ -6,9 +6,7 @@ defmodule QuizzezWeb.AuthController do
 
   plug Ueberauth
 
-  def callback(%{assigns: %{ueberauth_auth: %{info: user_info}}} = conn, %{
-        "provider" => _provider
-      }) do
+  def callback(%{assigns: %{ueberauth_auth: %{info: user_info}}} = conn, _params) do
     case Accounts.get_or_register(user_info) do
       {:ok, user} ->
         conn

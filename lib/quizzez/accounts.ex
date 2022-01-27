@@ -57,19 +57,13 @@ defmodule Quizzez.Accounts do
 
   ## Examples
 
-      iex> create_user(%{field: value})
+      iex> register(%{field: value})
       {:ok, %User{}}
 
-      iex> create_user(%{field: bad_value})
+      iex> register(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_user(attrs \\ %{}) do
-    %User{}
-    |> User.changeset(attrs)
-    |> Repo.insert()
-  end
-
   def register(%Ueberauth.Auth.Info{} = user_params) do
     %User{}
     |> User.oauth_changeset(extract_user_params(user_params))
@@ -146,6 +140,18 @@ defmodule Quizzez.Accounts do
     Repo.get_by(User, email: email)
   end
 
+  @doc """
+  Either returns an existing user or tries to create a new user
+
+  ## Examples
+
+      iex> get_or_register(%{field: value})
+      {:ok, user}
+
+      iex> get_or_register(%{field: bad_value})
+      {:error, changeset}
+
+  """
   def get_or_register(%Ueberauth.Auth.Info{email: email} = user_params) do
     if user = get_by_email(email) do
       {:ok, user}
