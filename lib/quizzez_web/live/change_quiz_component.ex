@@ -22,8 +22,6 @@ defmodule QuizzezWeb.ChangeQuizComponent do
       Quizzes.change_quiz(quiz)
       |> Ecto.Changeset.put_assoc(:questions, quiz.questions)
 
-    IO.inspect(user.id, label: "user_id")
-
     socket =
       socket
       |> assign(:changeset, changeset)

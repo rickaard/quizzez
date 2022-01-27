@@ -6,17 +6,6 @@ defmodule QuizzezWeb.AuthController do
 
   plug Ueberauth
 
-  # def callback(%{assigns: %{ueberauth_auth: %{info: user_info}}} = conn, %{"provider" => provider}) do
-  #   user_params = %{
-  #     email: user_info.email,
-  #     name: user_info.name || "Anonymous",
-  #     provider: provider || "unknown"
-  #   }
-
-  #   changeset = User.changeset(%User{}, user_params)
-
-  #   sign_in(conn, changeset)
-  # end
   def callback(%{assigns: %{ueberauth_auth: %{info: user_info}}} = conn, %{
         "provider" => _provider
       }) do
