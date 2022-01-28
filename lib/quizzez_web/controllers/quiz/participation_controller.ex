@@ -4,7 +4,7 @@ defmodule QuizzezWeb.Quiz.ParticipationController do
   alias Quizzez.Quizzes
   alias Quizzez.Quizzes.Quiz
 
-  def show(conn, %{"id" => quiz_id} = _params) do
+  def show(conn, %{"quiz_id" => quiz_id} = _params) do
     case Quizzes.get_quiz_with_questions_and_answers(quiz_id) do
       quiz = %Quiz{} ->
         conn

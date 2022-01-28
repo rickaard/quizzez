@@ -50,8 +50,8 @@ defmodule QuizzezWeb.Router do
   scope "/", QuizzezWeb do
     pipe_through [:browser, :guardian]
 
-    resources("/quiz", QuizController, singleton: true) do
-      get("/participation/:id", Quiz.ParticipationController, :show)
+    resources("/quiz", QuizController, only: ~w[new edit]a) do
+      resources("/participation", Quiz.ParticipationController, only: ~w[show]a, singleton: true)
     end
 
     post("/login", SessionController, :create)
