@@ -31,7 +31,7 @@ defmodule QuizzezWeb.Authentication do
     __MODULE__.Plug.current_resource(conn)
   end
 
-  def authenticate(%User{provider: _}, _password) do
+  def authenticate(%User{provider: "google"}, _password) do
     {:error, :invalid_strategy}
   end
 
