@@ -20,7 +20,7 @@ user_1 =
   Repo.insert!(%User{
     email: "admin@example.com",
     name: "Admin",
-    provider: "Google"
+    provider: "google"
   })
 
 ##### FIRST QUIZ #####

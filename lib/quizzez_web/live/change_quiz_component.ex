@@ -15,7 +15,7 @@ defmodule QuizzezWeb.ChangeQuizComponent do
 
   alias QuizzezWeb.SVGHelpers
 
-  def mount(_params, %{"user_id" => user_id} = _session, socket) do
+  def mount(_params, %{"user" => user} = _session, socket) do
     quiz = empty_full_quiz()
 
     changeset =
@@ -25,7 +25,7 @@ defmodule QuizzezWeb.ChangeQuizComponent do
     socket =
       socket
       |> assign(:changeset, changeset)
-      |> assign(:user_id, user_id)
+      |> assign(:user_id, user.id)
       |> assign(:selected_category, nil)
 
     {:ok, socket}

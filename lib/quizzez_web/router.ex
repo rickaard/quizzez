@@ -8,7 +8,14 @@ defmodule QuizzezWeb.Router do
     plug(:put_root_layout, {QuizzezWeb.LayoutView, :root})
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
-    plug(QuizzezWeb.Plugs.SetUser)
+  end
+
+  pipeline :guardian do
+    plug QuizzezWeb.Authentication.Pipeline
+  end
+
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
   end
 
   pipeline :api do
@@ -16,19 +23,36 @@ defmodule QuizzezWeb.Router do
   end
 
   scope "/auth", QuizzezWeb do
-    pipe_through(:browser)
+    pipe_through [:browser, :guardian, QuizzezWeb.Plugs.RedirectIfAuthenticated]
 
     get("/:provider", AuthController, :request)
     get("/:provider/callback", AuthController, :callback)
     post("/:provider/callback", AuthController, :callback)
-    delete("/logout", AuthController, :sign_out)
+    post("/identity/callback", AuthController, :identity_callback)
   end
 
   scope "/", QuizzezWeb do
-    pipe_through(:browser)
+    pipe_through [:browser, :guardian, QuizzezWeb.Plugs.RedirectIfAuthenticated]
+
+    get("/register", RegistrationController, :new)
+    post("/register", RegistrationController, :create)
+    get("/login", SessionController, :new)
+  end
+
+  # Authenticated routes
+  scope "/", QuizzezWeb do
+    pipe_through [:browser, :guardian, :ensure_auth]
+
+    resources("/profile", ProfileController, only: ~w[show update]a)
+    delete("/logout", SessionController, :delete)
+  end
+
+  scope "/", QuizzezWeb do
+    pipe_through [:browser, :guardian]
 
     resources("/quiz", QuizController)
-    resources("/profile", ProfileController, only: ~w[show update]a)
+    post("/login", SessionController, :create)
+
     resources("/", PageController)
   end
 

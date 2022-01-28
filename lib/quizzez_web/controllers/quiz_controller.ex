@@ -3,8 +3,9 @@ defmodule QuizzezWeb.QuizController do
 
   alias Quizzez.Quizzes
   alias Quizzez.Quizzes.Quiz
+  alias QuizzezWeb.Authentication
 
-  plug(QuizzezWeb.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete])
+  plug(Guardian.Plug.EnsureAuthenticated when action in [:new, :create, :edit, :update, :delete])
 
   def index(conn, _params) do
     all_quizzes = Quizzes.list_quizzes_with_questions()
@@ -20,7 +21,8 @@ defmodule QuizzezWeb.QuizController do
 
   def new(conn, _params) do
     changeset = Quiz.changeset(%Quiz{}, %{})
+    user = Authentication.get_current_user(conn)
 
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, user: user)
   end
 end

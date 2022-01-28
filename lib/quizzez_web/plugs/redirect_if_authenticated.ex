@@ -8,12 +8,13 @@ defmodule QuizzezWeb.Plugs.RedirectIfAuthenticated do
 
   alias QuizzezWeb.Router.Helpers
   alias Quizzez.Accounts.User
+  alias QuizzezWeb.Authentication
 
   def init(_params) do
   end
 
   def call(conn, _params) do
-    user = conn.assigns[:user]
+    user = Authentication.get_current_user(conn)
 
     case user do
       %User{} ->

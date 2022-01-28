@@ -1,0 +1,36 @@
+<div class="px-6 my-12 lg:my-28 flex flex-row items-center w-full">
+
+  <section class="flex-1 flex flex-col max-w-lg w-full mx-auto">
+
+    <h1 class="text-primary font-bold text-5xl mb-8">Sign in</h1>
+
+    <h3 class="text-primary text-2xl">Welcome back to QUIZZez</h3>
+
+    <p>New here? <%= link "Create an account", to: Routes.registration_path(@conn, :new), class: "underline hover:text-primary-50" %> </p>
+
+    <section class="flex flex-col my-4">
+        <%= form_for @changeset, @action, [as: :user, class: "flex flex-col"], fn f -> %>
+          <div class="my-2 flex flex-col">
+            <%= label f, :email, "Email address" %>
+            <%= email_input f, :email %>
+            <%= error_tag f, :email %>
+          </div>
+
+          <div class="my-2 flex flex-col">
+            <%= label f, :password, "Password" %>
+            <%= password_input f, :password %>
+            <%= error_tag f, :password %>
+          </div>
+
+          <%= submit "Sign in", class: "border-2 border-solid border-primary my-4 py-2 px-4 bg-primary text-white hover:bg-primary-50 hover:border-primary-50 hover:border-transparent font-bold" %>
+        <% end %>
+
+        <p class="text-center before:content-[''] after:content-[''] before:flex-1 after:flex-1 before:border-b-2 after:border-b-2 before:border-solid after:border-solid before:border-gray-300 after:border-gray-300 before:m-auto after:m-auto before:mr-2 after:ml-2 mb-4 flex flex-row">or sign in with</p>
+
+        <%= link to: Routes.auth_path(@conn, :request, "google"), class: "border-2 border-solid border-primary text-primary font-bold py-2 inline-flex items-center px-4 text-center gap-2 justify-center hover:bg-primary-50 hover:text-white hover:border-transparent" do %>
+          <i class="w-5"><%= SVGHelpers.inline_svg("google-icon") %> </i>
+          Google
+        <% end %>
+    </section>
+  </section>
+</div>

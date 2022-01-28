@@ -3,8 +3,6 @@ defmodule QuizzezWeb.PageController do
 
   alias Quizzez.Quizzes
 
-  plug(QuizzezWeb.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete])
-
   def index(conn, _params) do
     all_quizzes = Quizzes.list_quizzes_with_questions()
 

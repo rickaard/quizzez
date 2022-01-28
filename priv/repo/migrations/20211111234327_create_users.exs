@@ -7,8 +7,9 @@ defmodule Quizzez.Repo.Migrations.CreateUsers do
     create table(:users, primary_key: false) do
       add :id, :binary_id, primary_key: true, null: false
       add :name, :string
-      add :provider, :string
       add :email, :citext, null: false
+      add :provider, :string
+      add :encrypted_password, :string
 
       timestamps()
     end

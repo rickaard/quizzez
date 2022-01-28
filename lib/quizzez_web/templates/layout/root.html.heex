@@ -20,17 +20,18 @@
             </a>
           </div>
           <ul class="header-nav__items">
-            <%= if @conn.assigns[:user] do %>
+            <%= if QuizzezWeb.Authentication.logged_in?(@conn) do %>
               <li>
-                <%= link "Profile", to: Routes.profile_path(@conn, :show, @conn.assigns[:user].id) %>
+                <%= link "Profile", to: Routes.profile_path(@conn, :show, QuizzezWeb.Authentication.get_current_user(@conn).id) %>
               </li>
               <li>
-                <%= link "Logout", to: Routes.auth_path(@conn, :sign_out), method: :delete %>
+                <%= link "Logout", to: Routes.session_path(@conn, :delete), method: :delete %>
               </li>
             <% else %>
               <li>
-                <%= link "Login", to: Routes.auth_path(@conn, :request, "google") %>
+                <%= link "Login", to: Routes.session_path(@conn, :new) %>
               </li>
+
             <% end %>
           </ul>
         </nav>
