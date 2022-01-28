@@ -15,6 +15,14 @@ defmodule QuizzezWeb.Factories do
     }
   end
 
+  def identity_user_factory do
+    %Accounts.User{
+      email: sequence(:email, &"email-#{&1}@example.com"),
+      name: "John Doe",
+      encrypted_password: "password"
+    }
+  end
+
   def quiz_factory do
     %Quizzes.Quiz{
       title: sequence(:title, &"Quiz-#{&1} title"),
