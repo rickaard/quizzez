@@ -1,4 +1,5 @@
 defmodule QuizzezWeb.Quiz.ParticipationViewTest do
+  @moduledoc false
   use QuizzezWeb.ConnCase, async: true
 
   alias QuizzezWeb.Quiz.ParticipationView

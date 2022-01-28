@@ -14,9 +14,8 @@ defmodule QuizzezWeb.QuizController do
     render(conn, "new.html", changeset: changeset, user: user)
   end
 
-  def edit(conn, %{"id" => quiz_id} = params) do
-    IO.inspect(params, label: "params")
-    quiz_changeset = Quizzes.get_quiz!(quiz_id) |> IO.inspect() |> Quizzes.change_quiz()
+  def edit(conn, %{"id" => quiz_id} = _params) do
+    quiz_changeset = Quizzes.get_quiz!(quiz_id) |> Quizzes.change_quiz()
     user = Authentication.get_current_user(conn)
 
     render(conn, "new.html", changeset: quiz_changeset, user: user)
