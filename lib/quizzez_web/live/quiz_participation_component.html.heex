@@ -1,5 +1,20 @@
 <section class="container mt-20 px-6 mx-auto flex flex-col max-w-4xl">
-  <h2><%= @quiz.title %></h2>
-  <p><%= @quiz.description %></p>
-  <p><%= question_amount_text(@quiz.questions) %></p>
+  <%= if @status == :unstarted do %>
+    <h2><%= @quiz.title %></h2>
+    <p><%= @quiz.description %></p>
+    <p><%= question_amount_text(@quiz.questions) %></p>
+
+
+  <% else %>
+    <h3><%= @current_question.text %></h3>
+    <ul>
+      <%= for answer <- @current_question.answers do %>
+        <li><%= answer.text %></li>
+      <% end %>
+    </ul>
+
+  <% end %>
+
+  <button phx-click="next_question"><%= if @status == :unstarted, do: "Start quiz", else: "Next question" %></button>
+
 </section>
