@@ -53,6 +53,11 @@ defmodule QuizzezWeb.QuizParticipationComponent do
     {:noreply, socket}
   end
 
+  def handle_event("answer-question", params, socket) do
+    IO.inspect(params, label: "params")
+    {:noreply, socket}
+  end
+
   def handle_event("next-question", _params, socket) do
     all_questions = socket.assigns.quiz.questions
     prev_question_index = socket.assigns.current_question_index

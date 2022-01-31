@@ -8,11 +8,18 @@
 
   <%= if @status == :started do %>
     <h3><%= @current_question.text %></h3>
-    <ul>
-      <%= for answer <- @current_question.answers do %>
-        <li><%= answer.text %></li>
-      <% end %>
-    </ul>
+    <form phx-change="answer-question">
+      <ul>
+        <%= for answer <- @current_question.answers do %>
+          <li>
+            <label>
+              <%= answer.text %>
+                <input type="radio" value={answer.id} name={@current_question.id}>
+            </label>
+          </li>
+        <% end %>
+      </ul>
+    </form>
     <div class="flex justify-between mt-6">
 
       <%= if not first_question?(assigns) do %>
