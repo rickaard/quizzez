@@ -3,18 +3,32 @@
     <h2><%= @quiz.title %></h2>
     <p><%= @quiz.description %></p>
     <p><%= question_amount_text(@quiz.questions) %></p>
+    <button phx-click="start-quiz">Start quiz</button>
+  <% end %>
 
-
-  <% else %>
+  <%= if @status == :started do %>
     <h3><%= @current_question.text %></h3>
     <ul>
       <%= for answer <- @current_question.answers do %>
         <li><%= answer.text %></li>
       <% end %>
     </ul>
+    <div class="flex justify-between mt-6">
 
+      <%= if not first_question?(assigns) do %>
+        <button phx-click="prev-question">Previous question</button>
+      <% end %>
+
+      <%= if last_question?(assigns) do %>
+        <button class="ml-auto" phx-click="calculate-score">Show score</button>
+      <% else %>
+        <button class="ml-auto" phx-click="next-question">Next question</button>
+      <% end %>
+    </div>
   <% end %>
 
-  <button phx-click="next_question"><%= if @status == :unstarted, do: "Start quiz", else: "Next question" %></button>
+  <%= if @status == :completed do %>
+    <h3>Good job!</h3>
+  <% end %>
 
 </section>
