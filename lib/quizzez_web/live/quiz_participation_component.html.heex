@@ -8,18 +8,16 @@
 
   <%= if @status == :started do %>
     <h3><%= @current_question.text %></h3>
-    <form phx-change="answer-question">
-      <ul>
+      <ul class="flex flex-row flex-wrap gap-4 md:gap-8 justify-between">
         <%= for answer <- @current_question.answers do %>
-          <li>
-            <label>
+          <li class="w-full md:basis-5/12">
+            <button phx-click="answer-question" phx-value-answer-id={answer.id} class={answer_button_classes(answer, assigns)}>
               <%= answer.text %>
-                <input type="radio" value={answer.id} name={@current_question.id}>
-            </label>
+            </button>
           </li>
         <% end %>
       </ul>
-    </form>
+
     <div class="flex justify-between mt-6">
 
       <%= if not first_question?(assigns) do %>

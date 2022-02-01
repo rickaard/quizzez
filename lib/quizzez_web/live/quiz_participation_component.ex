@@ -5,6 +5,9 @@ defmodule QuizzezWeb.QuizParticipationComponent do
   use QuizzezWeb, :live_view
   use Phoenix.HTML
 
+  alias Quizzez.Quizzes.Question
+  alias Quizzez.Quizzes.Answer
+
   def mount(_params, %{"quiz" => quiz} = _session, socket) do
     socket =
       socket
@@ -13,6 +16,7 @@ defmodule QuizzezWeb.QuizParticipationComponent do
       |> assign(:current_question_index, nil)
       |> assign(:status, :unstarted)
       |> assign(:questions_amount, length(quiz.questions))
+      |> assign(:answers, [])
 
     {:ok, socket}
   end
@@ -45,17 +49,34 @@ defmodule QuizzezWeb.QuizParticipationComponent do
       socket
       |> assign(:current_question, next_question)
       |> assign(:current_question_index, prev_question_index - 1)
+      |> assign(:current_question, next_question)
 
-    {:noreply, assign(socket, :current_question, next_question)}
+    {:noreply, socket}
   end
 
   def handle_event("calculate-score", _params, socket) do
+    IO.inspect(socket.assigns.answers, label: "answers")
     {:noreply, socket}
   end
 
-  def handle_event("answer-question", params, socket) do
-    IO.inspect(params, label: "params")
-    {:noreply, socket}
+  # def handle_event("answer-question", params, socket) do
+  #   IO.inspect(params, label: "params")
+  #   {:noreply, socket}
+  # end
+
+  def handle_event("answer-question", %{"answer-id" => answer_id} = _params, socket) do
+    current_question = socket.assigns.current_question
+
+    answers =
+      Enum.reject(socket.assigns.answers, fn answer ->
+        answer.question_id == current_question.id
+      end)
+
+    chosen_answer = Enum.find(current_question.answers, fn answer -> answer.id == answer_id end)
+
+    answer_for_question = %{question_id: current_question.id, answer_id: chosen_answer.id}
+
+    {:noreply, assign(socket, :answers, answers ++ [answer_for_question])}
   end
 
   def handle_event("next-question", _params, socket) do
@@ -73,8 +94,9 @@ defmodule QuizzezWeb.QuizParticipationComponent do
       socket
       |> assign(:current_question, next_question)
       |> assign(:current_question_index, prev_question_index + 1)
+      |> assign(:current_question, next_question)
 
-    {:noreply, assign(socket, :current_question, next_question)}
+    {:noreply, socket}
   end
 
   defp question_amount_text(questions) when length(questions) == 1, do: "1 question"
@@ -86,5 +108,32 @@ defmodule QuizzezWeb.QuizParticipationComponent do
 
   def first_question?(%{current_question_index: current} = _assigns) do
     current == 0
+  end
+
+  def selected_answer_for_question?(%Answer{id: answer_id}, %{answers: answers} = assigns) do
+    case question_answered?(assigns) do
+      true ->
+        selected_answer_for_question =
+          Enum.find(answers, fn answer -> answer.question_id == assigns.current_question.id end)
+
+        answer_id == selected_answer_for_question.question_id
+
+      false ->
+        false
+    end
+  end
+
+  defp question_answered?(%{answers: answers, current_question: current_question} = _assigns) do
+    Enum.any?(answers, fn answer -> answer.question_id == current_question.id end)
+  end
+
+  defp answer_button_classes(answer, assigns) do
+    case selected_answer_for_question?(answer, assigns) do
+      true ->
+        "border border-solid border-gray-400 py-2 px-4 w-full bg-primary"
+
+      false ->
+        "border border-solid border-gray-400 py-2 px-4 w-full"
+    end
   end
 end
