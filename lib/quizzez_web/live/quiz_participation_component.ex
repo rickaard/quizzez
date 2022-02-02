@@ -54,14 +54,8 @@ defmodule QuizzezWeb.QuizParticipationComponent do
   end
 
   def handle_event("calculate-score", _params, socket) do
-    IO.inspect(socket.assigns.answers, label: "answers")
     {:noreply, socket}
   end
-
-  # def handle_event("answer-question", params, socket) do
-  #   IO.inspect(params, label: "params")
-  #   {:noreply, socket}
-  # end
 
   def handle_event("answer-question", %{"answer-id" => answer_id} = _params, socket) do
     current_question = socket.assigns.current_question
