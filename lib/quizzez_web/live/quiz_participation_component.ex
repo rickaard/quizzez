@@ -116,7 +116,7 @@ defmodule QuizzezWeb.QuizParticipationComponent do
         selected_answer_for_question =
           Enum.find(answers, fn answer -> answer.question_id == assigns.current_question.id end)
 
-        answer_id == selected_answer_for_question.question_id
+        answer_id == selected_answer_for_question.answer_id
 
       false ->
         false
@@ -130,10 +130,10 @@ defmodule QuizzezWeb.QuizParticipationComponent do
   defp answer_button_classes(answer, assigns) do
     case selected_answer_for_question?(answer, assigns) do
       true ->
-        "border border-solid border-gray-400 py-2 px-4 w-full bg-primary"
+        "border border-solid border-gray-400 py-2 px-4 w-full bg-primary text-white"
 
       false ->
-        "border border-solid border-gray-400 py-2 px-4 w-full"
+        "border border-solid border-gray-400 py-2 px-4 w-full hover:bg-primary-50 hover:text-white"
     end
   end
 end
