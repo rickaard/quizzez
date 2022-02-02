@@ -5,7 +5,6 @@ defmodule QuizzezWeb.QuizParticipationComponent do
   use QuizzezWeb, :live_view
   use Phoenix.HTML
 
-  alias Quizzez.Quizzes.Question
   alias Quizzez.Quizzes.Answer
 
   def mount(_params, %{"quiz" => quiz} = _session, socket) do
