@@ -207,4 +207,36 @@ defmodule Quizzez.Quizzes do
   def change_quiz(%Quiz{} = quiz, attrs \\ %{}) do
     Quiz.changeset(quiz, attrs)
   end
+
+  def calculate_score(%Quiz{questions: questions}, answers) do
+    calculate_score(questions, answers, 0)
+  end
+
+  def calculate_score(_questions, [], working_score), do: working_score
+
+  def calculate_score(questions, [first | rest], working_score) do
+    correct_answer_for_question =
+      questions
+      |> Enum.find(&(&1.id == first.question_id))
+      |> Map.get(:answers)
+      |> Enum.find(&(&1.is_correct == true))
+
+    case correct_answer_for_question.id == first.answer_id do
+      true -> calculate_score(questions, rest, working_score + 1)
+      false -> calculate_score(questions, rest, working_score)
+    end
+  end
+
+  # def correct_answer_for_questions(%Quiz{questions: questions}, answers) do
+  #   # [
+  #   #   %{
+  #   #     correct_answer: %Answer{},
+  #   #     selected_answer: %Answer{}
+  #   #   },
+  #   #   %{
+  #   #     correct_answer: %Answer{},
+  #   #     selected_answer: %Answer{}
+  #   #   },
+  #   # ]
+  # end
 end

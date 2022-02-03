@@ -25,7 +25,7 @@
       <% end %>
 
       <%= if last_question?(assigns) do %>
-        <button class="ml-auto" phx-click="calculate-score">Show score</button>
+        <button class="ml-auto" phx-click="calculate-score" disabled={if not question_answered?(assigns), do: true}>Show score</button>
       <% else %>
         <button class="ml-auto" phx-click="next-question" disabled={if not question_answered?(assigns), do: true}>Next question</button>
       <% end %>
