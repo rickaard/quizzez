@@ -175,6 +175,10 @@ defmodule QuizzezWeb.QuizParticipationComponentTest do
       |> element("button", "Start quiz")
       |> render_click()
 
+      view
+      |> element("button", "This is first answer")
+      |> render_click()
+
       html =
         view
         |> element("button", "Next question")
