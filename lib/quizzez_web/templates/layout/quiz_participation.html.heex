@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<%= render QuizzezWeb.LayoutView, "_head.html", assigns %>
+<body>
+  <main class="container mx-auto">
+    <p class="alert alert-info max-w-4xl mx-auto" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert alert-danger max-w-4xl mx-auto" role="alert"><%= get_flash(@conn, :error) %></p>
+    <%= @inner_content %>
+  </main>
+</body>
+</html>
