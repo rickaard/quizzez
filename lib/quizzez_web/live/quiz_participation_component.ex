@@ -8,6 +8,7 @@ defmodule QuizzezWeb.QuizParticipationComponent do
   alias Quizzez.Quizzes
   alias Quizzez.Quizzes.Answer
   alias Quizzez.Helpers
+  alias QuizzezWeb.SVGHelpers
 
   def mount(_params, %{"quiz" => quiz} = _session, socket) do
     socket =
@@ -140,10 +141,10 @@ defmodule QuizzezWeb.QuizParticipationComponent do
   defp answer_button_classes(answer, assigns) do
     case selected_answer_for_question?(answer, assigns) do
       true ->
-        "border border-solid border-gray-400 py-2 px-4 w-full bg-primary text-white"
+        "border border-solid border-gray-400 py-2 px-4 w-full bg-[#9CFFFA] text-black"
 
       false ->
-        "border border-solid border-gray-400 py-2 px-4 w-full hover:bg-primary-50 hover:text-white"
+        "border border-solid border-gray-400 py-2 px-4 w-full hover:bg-[#9CFFFA70] hover:text-black"
     end
   end
 end

@@ -1,14 +1,17 @@
 <section class="container mt-20 px-6 mx-auto flex flex-col max-w-4xl">
   <%= if @status == :unstarted do %>
-    <h2><%= @quiz.title %></h2>
-    <p><%= @quiz.description %></p>
-    <p><%= question_amount_text(@quiz.questions) %></p>
-    <button phx-click="start-quiz">Start quiz</button>
+    <h2 class="text-6xl text-white font-bold mb-4 text-center"><%= @quiz.title %></h2>
+    <div class="w-max flex flex-col gap-2 mx-auto my-4 mb-8">
+      <p class="text-2xl text-gray-300 text-center"><%= @quiz.description %></p>
+      <p class="text-gray-400"><%= question_amount_text(@quiz.questions) %></p>
+    </div>
+
+    <button class="uppercase border border-solid border-white min-w-[200px] px-4 py-2 mx-auto mt-8 mb-4 transition hover:scale-110" phx-click="start-quiz">Start quiz</button>
   <% end %>
 
   <%= if @status == :started do %>
-    <h3><%= @current_question.text %></h3>
-      <ul class="flex flex-row flex-wrap gap-4 md:gap-8 justify-between">
+    <h3 class="text-6xl text-white font-bold mb-4 text-center"><%= @current_question.text %></h3>
+      <ul class="flex flex-row flex-wrap gap-2 md:gap-8 justify-between mt-16">
         <%= for answer <- @current_question.answers do %>
           <li class="w-full md:basis-5/12">
             <button phx-click="answer-question" phx-value-answer-id={answer.id} class={answer_button_classes(answer, assigns)}>
@@ -18,30 +21,42 @@
         <% end %>
       </ul>
 
-    <div class="flex justify-between mt-6">
-
+    <div class="flex justify-between mt-20 before:content-[''] before:block before:h-[1px] before:bg-gray-400 before:w-full before:absolute relative before:top-4">
       <%= if not first_question?(assigns) do %>
-        <button phx-click="prev-question">Previous question</button>
+        <button class="group uppercase flex items-center justify-center border border-solid border-white min-w-[200px] px-4 py-2 mt-8 mb-4" phx-click="prev-question">
+          <i class="w-5 mr-0.5 transition group-hover:-translate-x-1"><%= SVGHelpers.inline_svg("icons/arrow-left") %></i> Previous question
+        </button>
       <% end %>
 
       <%= if last_question?(assigns) do %>
-        <button class="ml-auto" phx-click="calculate-score" disabled={if not question_answered?(assigns), do: true}>Show score</button>
+        <button
+          class="group flex items-center justify-center cursor-pointer uppercase border border-solid border-white min-w-[200px] px-4 py-2 mt-8 mb-4 ml-auto disabled:border-gray-400 disabled:text-gray-400 disabled:cursor-not-allowed"
+          phx-click="calculate-score"
+          disabled={if not question_answered?(assigns), do: true}
+        >
+          Show score <i class="w-5 ml-0.5 transition group-hover:translate-x-1 disabled:pointer-events-none"><%= SVGHelpers.inline_svg("icons/academic-cap") %></i>
+        </button>
       <% else %>
-        <button class="ml-auto" phx-click="next-question" disabled={if not question_answered?(assigns), do: true}>Next question</button>
+        <button class="group flex items-center justify-center cursor-pointer uppercase border border-solid border-white min-w-[200px] px-4 py-2 mt-8 mb-4 ml-auto disabled:border-gray-400 disabled:text-gray-400 disabled:cursor-not-allowed" phx-click="next-question" disabled={if not question_answered?(assigns), do: true}>
+          Next question <i class="w-5 ml-0.5 transition group-hover:translate-x-1"><%= SVGHelpers.inline_svg("icons/arrow-right") %></i>
+        </button>
       <% end %>
     </div>
   <% end %>
 
   <%= if @status == :completed do %>
-    <section>
-      <h3>Good job!</h3>
-      <QuizzezWeb.Components.Graphics.progress_circle score={@score} width={200}/>
-      <div>
-        <span><%= @correct_answers %> </span>
-        <span>/</span>
-        <span><%= @questions_amount %></span>
+      <h3 class="text-5xl mb-4 text-center mx-auto flex flex-col gap-1">
+        <span>Good job!</span>
+        <span>You completed the quiz!</span>
+      </h3>
+      <div class="my-8">
+        <QuizzezWeb.Components.Graphics.progress_circle score={@score} width={200}/>
       </div>
-    </section>
+      <div>
+        <p class="text-2xl font-bold text-center"><%= "#{@correct_answers}/#{@questions_amount}" %></p>
+        <p class="text-gray-400 text-base text-center">Questions</p>
+      </div>
+
   <% end %>
 
 </section>
