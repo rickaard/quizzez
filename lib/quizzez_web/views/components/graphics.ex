@@ -6,7 +6,6 @@ defmodule QuizzezWeb.Components.Graphics do
 
   def progress_circle(assigns) do
     assigns = assign_new(assigns, :width, fn -> 142 end)
-    # assigns = assign_new(assigns, :radius, fn -> assigns.width / 2 - 8 end)
     radius = assigns.width / 2 - 8
     graphic_center = assigns.width / 2
 
@@ -14,12 +13,21 @@ defmodule QuizzezWeb.Components.Graphics do
     <div class="relative flex items-center justify-center">
       <svg class="relative" height={@width} width={@width}>
         <circle class="stroke-gray-400" cx={graphic_center} cy={graphic_center} r={radius} stroke-width="14" fill="none" />
-        <circle class={"stroke-[#{circle_color(@score)}]"} cx={@width / 2} cy={@width / 2} r={radius} stroke-linecap="round" stroke-width="14" fill="none" stroke-dasharray={"#{circle_dash_length(@score, radius)} 500"} style="transform-origin: 50% 50%; transform: rotate(-90deg);" />
+        <circle
+          cx={@width / 2}
+          cy={@width / 2}
+          r={radius}
+          stroke-linecap="round"
+          stroke-width="14"
+          fill="none"
+          stroke-dasharray={"#{circle_dash_length(@score, radius)} 500"}
+          style={"transform-origin: 50% 50%; transform: rotate(-90deg); stroke: #{circle_color(@score)}"}
+        />
       </svg>
-      <div class="absolute text-5xl text-center p-0 m-0 flex justify-center items-baseline">
-          <span class={"text-4xl mr-1 font-bold text-[#{circle_color(@score)}]"}><%= @score %></span>
-          <span class="text-base">%</span>
-        </div>
+      <div class="absolute text-5xl text-center p-0 m-0 flex justify-center items-baseline" style={"color: #{circle_color(@score)}"}>
+        <span class={"text-4xl mr-1 font-bold"}><%= @score %></span>
+        <span class="text-base">%</span>
+      </div>
     </div>
     """
   end
