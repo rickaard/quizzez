@@ -29,8 +29,8 @@ defmodule Quizzez.Quizzes do
 
   Examples
 
-    iex> list_quizzes_with_questions()
-    [%Quiz{questions: [%Question{}, ...]}, ...]
+      iex> list_quizzes_with_questions()
+      [%Quiz{questions: [%Question{}, ...]}, ...]
   """
   def list_quizzes_with_questions do
     Quiz

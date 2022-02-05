@@ -5,7 +5,9 @@ defmodule QuizzezWeb.QuizParticipationComponent do
   use QuizzezWeb, :live_view
   use Phoenix.HTML
 
+  alias Quizzez.Quizzes
   alias Quizzez.Quizzes.Answer
+  alias Quizzez.Helpers
 
   def mount(_params, %{"quiz" => quiz} = _session, socket) do
     socket =
@@ -54,6 +56,21 @@ defmodule QuizzezWeb.QuizParticipationComponent do
   end
 
   def handle_event("calculate-score", _params, socket) do
+    correct_answers = Quizzes.calculate_score(socket.assigns.quiz, socket.assigns.answers)
+
+    score =
+      Helpers.rescale(correct_answers,
+        from: 0..socket.assigns.questions_amount,
+        to: 0..100,
+        round: true
+      )
+
+    socket =
+      socket
+      |> assign(:status, :completed)
+      |> assign(:correct_answers, correct_answers)
+      |> assign(:score, score)
+
     {:noreply, socket}
   end
 

@@ -33,7 +33,15 @@
   <% end %>
 
   <%= if @status == :completed do %>
-    <h3>Good job!</h3>
+    <section>
+      <h3>Good job!</h3>
+      <QuizzezWeb.Components.Graphics.progress_circle score={@score} width={200}/>
+      <div>
+        <span><%= @correct_answers %> </span>
+        <span>/</span>
+        <span><%= @questions_amount %></span>
+      </div>
+    </section>
   <% end %>
 
 </section>
