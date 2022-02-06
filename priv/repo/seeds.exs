@@ -20,7 +20,7 @@ user_1 =
   Repo.insert!(%User{
     email: "admin@example.com",
     name: "Admin",
-    provider: "google"
+    encrypted_password: Argon2.hash_pwd_salt("password")
   })
 
 ##### FIRST QUIZ #####
