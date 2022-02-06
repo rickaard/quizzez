@@ -16,16 +16,18 @@ defmodule QuizzezWeb.Components.Graphics do
     <div class="relative flex items-center justify-center">
       <svg class="relative" height={@width} width={@width}>
         <circle class="stroke-gray-400" cx={graphic_center} cy={graphic_center} r={radius - 6} stroke-width="18" fill="none" />
-        <circle
-          cx={@width / 2}
-          cy={@width / 2}
-          r={radius}
-          stroke-linecap="round"
-          stroke-width="12"
-          fill="none"
-          stroke-dasharray={"#{circle_dash_length(@score, radius)} 500"}
-          style={"transform-origin: 50% 50%; transform: rotate(-90deg); stroke: #{circle_color(@score)}"}
-        />
+        <%= if @score >= 10 do %>
+          <circle
+            cx={@width / 2}
+            cy={@width / 2}
+            r={radius}
+            stroke-linecap="round"
+            stroke-width="12"
+            fill="none"
+            stroke-dasharray={"#{circle_dash_length(@score, radius)} 500"}
+            style={"transform-origin: 50% 50%; transform: rotate(-90deg); stroke: #{circle_color(@score)}"}
+          />
+        <% end %>
       </svg>
       <div class="absolute text-5xl text-center p-0 m-0 flex justify-center items-baseline" style={"color: #{circle_color(@score)}"}>
         <span class={"text-6xl mr-1 font-bold"}><%= @score %></span>
