@@ -9,9 +9,6 @@ defmodule QuizzezWeb.Components.Graphics do
     radius = assigns.width / 2 - 8
     graphic_center = assigns.width / 2
 
-    IO.inspect(assigns, label: "assigns")
-    IO.inspect(assigns.width, label: "assigns.width")
-
     ~H"""
     <div class="relative flex items-center justify-center">
       <svg class="relative" height={@width} width={@width}>

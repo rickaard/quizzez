@@ -59,12 +59,7 @@ defmodule QuizzezWeb.QuizParticipationComponent do
   def handle_event("calculate-score", _params, socket) do
     correct_answers = Quizzes.calculate_score(socket.assigns.quiz, socket.assigns.answers)
 
-    score =
-      Helpers.rescale(correct_answers,
-        from: 0..socket.assigns.questions_amount,
-        to: 0..100,
-        round: true
-      )
+    score = round(correct_answers / socket.assigns.questions_amount * 100)
 
     socket =
       socket
