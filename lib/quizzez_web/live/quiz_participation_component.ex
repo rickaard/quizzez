@@ -7,7 +7,6 @@ defmodule QuizzezWeb.QuizParticipationComponent do
 
   alias Quizzez.Quizzes
   alias Quizzez.Quizzes.Answer
-  alias Quizzez.Helpers
   alias QuizzezWeb.SVGHelpers
 
   def mount(_params, %{"quiz" => quiz} = _session, socket) do

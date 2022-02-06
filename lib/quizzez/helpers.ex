@@ -1,4 +1,8 @@
 defmodule Quizzez.Helpers do
+  @moduledoc """
+  A module with a set of helper functions to be used in the projekt
+  """
+
   @doc """
   Scales a number from one scale to another.
   Options
