@@ -2,11 +2,11 @@
 </section>
 
 <section class="row">
-  <article class="column">
+  <article class="flex flex-row flex-wrap gap-8 justify-between mt-6">
     <%= for quiz <- @quizzes do %>
-      <h3>Title: <%= quiz.title %></h3>
-      <p>Description: <%= quiz.description %></p>
-      <p>Amount of questions: <%= Enum.count(quiz.questions) %></p>
+      <%= link to: Routes.quiz_participation_path(@conn, :show, quiz.id), class: "w-full" do %>
+        <QuizzezWeb.Components.QuizDetailCard.card quiz={quiz} can_modify={true}/>
+      <% end %>
     <% end %>
   </article>
   <article class="column">
