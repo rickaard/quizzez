@@ -13,6 +13,15 @@ module.exports = {
         primary: "#635994",
         "primary-50": "#6359947d",
       },
+      keyframes: {
+        fadeIn: {
+          "0%": { transform: "translateX(500px)" },
+          "100%": { transform: "translateX(0)" },
+        },
+      },
+      animation: {
+        fadeIn: "fadeIn 0.2s linear 1",
+      },
     },
   },
   plugins: [require("@tailwindcss/forms")],

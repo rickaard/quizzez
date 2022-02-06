@@ -11,7 +11,7 @@
 
   <%= if @status == :started do %>
     <h3 class="text-6xl text-white font-bold mb-4 text-center"><%= @current_question.text %></h3>
-      <ul class="flex flex-row flex-wrap gap-2 md:gap-8 justify-between mt-16">
+      <ul class="flex flex-row flex-wrap gap-2 md:gap-8 justify-between mt-16 animate-fadeIn">
         <%= for answer <- @current_question.answers do %>
           <li class="w-full md:basis-5/12">
             <button phx-click="answer-question" phx-value-answer-id={answer.id} class={answer_button_classes(answer, assigns)}>
