@@ -52,6 +52,26 @@ quiz_1_question_3 = %{
   ]
 }
 
+quiz_1_question_4 = %{
+  text: "What programming language is Elixir built upon?",
+  answers: [
+    %{text: "Ruby", is_correct: false},
+    %{text: "JavaScript", is_correct: false},
+    %{text: "Erlang", is_correct: true},
+    %{text: "C++", is_correct: false}
+  ]
+}
+
+quiz_1_question_5 = %{
+  text: "Who is the creator of Elixir?",
+  answers: [
+    %{text: "José Valim", is_correct: true},
+    %{text: "Brendan Eich", is_correct: false},
+    %{text: "Graydon Hoare", is_correct: false},
+    %{text: "Anders Hejlsberg", is_correct: false}
+  ]
+}
+
 Repo.insert!(%Quiz{
   title: "Elixir Quiz",
   description: "A little quix about Elixir and Pheonix",
@@ -59,7 +79,67 @@ Repo.insert!(%Quiz{
   questions: [
     quiz_1_question_1,
     quiz_1_question_2,
-    quiz_1_question_3
+    quiz_1_question_3,
+    quiz_1_question_4,
+    quiz_1_question_5
   ],
+  user: user_1
+})
+
+quiz_2_question_1 = %{
+  text: "What is 10 x 10?",
+  answers: [
+    %{text: "100", is_correct: true},
+    %{text: "10", is_correct: false},
+    %{text: "1000", is_correct: false},
+    %{text: "1 000 000", is_correct: false}
+  ]
+}
+
+quiz_2_question_2 = %{
+  text: "What is 5 x 5?",
+  answers: [
+    %{text: "25", is_correct: true},
+    %{text: "30", is_correct: false},
+    %{text: "10", is_correct: false},
+    %{text: "35", is_correct: false}
+  ]
+}
+
+quiz_2_question_3 = %{
+  text: "What is 3 x 3?",
+  answers: [
+    %{text: "6", is_correct: false},
+    %{text: "12", is_correct: false},
+    %{text: "9", is_correct: true},
+    %{text: "27", is_correct: false}
+  ]
+}
+
+quiz_2_question_4 = %{
+  text: "What is 1337 + 1337?",
+  answers: [
+    %{text: "2674", is_correct: true},
+    %{text: "2746", is_correct: false},
+    %{text: "1787569", is_correct: false},
+    %{text: "0", is_correct: false}
+  ]
+}
+
+quiz_2_question_5 = %{
+  text: "What is 12 / 3?",
+  answers: [
+    %{text: "36", is_correct: false},
+    %{text: "4", is_correct: true},
+    %{text: "15", is_correct: false},
+    %{text: "3", is_correct: false}
+  ]
+}
+
+Repo.insert!(%Quiz{
+  title: "Math quiz",
+  description: "A small and simple math quiz suited for children",
+  category: "math",
+  questions: [],
   user: user_1
 })
