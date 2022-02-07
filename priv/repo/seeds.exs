@@ -140,6 +140,12 @@ Repo.insert!(%Quiz{
   title: "Math quiz",
   description: "A small and simple math quiz suited for children",
   category: "math",
-  questions: [],
+  questions: [
+    quiz_2_question_1,
+    quiz_2_question_2,
+    quiz_2_question_3,
+    quiz_2_question_4,
+    quiz_2_question_5
+  ],
   user: user_1
 })
