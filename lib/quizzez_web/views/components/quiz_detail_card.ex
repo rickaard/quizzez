@@ -9,7 +9,7 @@ defmodule QuizzezWeb.Components.QuizDetailCard do
     assigns = assign_new(assigns, :can_modify, fn -> false end)
 
     ~H"""
-    <article class="flex flex-row border border-solid border-x-gray-200 w-full lg:w-[48%] relative rounded-lg">
+    <article class="group hover:cursor-pointer hover:border-gray-400 flex flex-row border border-solid border-x-gray-200 w-full lg:w-[48%] relative rounded-lg">
 
       <aside class="absolute w-full -top-2">
         <p class="bg-primary-50 text-white px-2 text-sm text-center w-max mx-auto"><%= @quiz.category %></p>
@@ -24,8 +24,8 @@ defmodule QuizzezWeb.Components.QuizDetailCard do
       <% end %>
 
       <div class="h-full py-2 px-2">
-        <div class="h-full min-w-[130px] flex items-center bg-primary bg-opacity-10 rounded-lg">
-          <img class="" src={Routes.static_path(QuizzezWeb.Endpoint, quiz_illustration_path(@quiz.category))} alt=""/>
+        <div class="h-full min-w-[130px] flex items-center bg-primary bg-opacity-10 rounded-lg overflow-hidden">
+          <img class="group-hover:scale-125 transition" src={Routes.static_path(QuizzezWeb.Endpoint, quiz_illustration_path(@quiz.category))} alt=""/>
         </div>
       </div>
 
@@ -39,7 +39,6 @@ defmodule QuizzezWeb.Components.QuizDetailCard do
           <p><%= questions_text(@quiz.questions) %> </p>
         </footer>
       </article>
-
 
     </article>
     """
