@@ -9,7 +9,7 @@ defmodule QuizzezWeb.Components.QuizDetailCard do
     assigns = assign_new(assigns, :can_modify, fn -> false end)
 
     ~H"""
-    <article class="group hover:cursor-pointer hover:border-gray-400 flex flex-row border border-solid border-x-gray-200 w-full h-full relative rounded-lg">
+    <article class="group  hover:border-gray-400 flex flex-row border border-solid border-x-gray-200 w-full h-full relative rounded-lg">
 
       <aside class="absolute w-full -top-2">
         <p class="bg-primary-50 text-white px-2 text-sm text-center w-max mx-auto"><%= @quiz.category %></p>
@@ -29,16 +29,18 @@ defmodule QuizzezWeb.Components.QuizDetailCard do
         </div>
       </div>
 
-      <article class="flex flex-col p-2">
-        <header class="flex flex-row justify-between mt-2">
-          <h6 class="font-bold text-primary"><%= @quiz.title %></h6>
-        </header>
+      <%= Phoenix.HTML.Link.link to: Routes.quiz_participation_path(QuizzezWeb.Endpoint, :show, @quiz.id), class: "hover:cursor-pointer" do %>
+        <article class="flex flex-col p-2">
+          <header class="flex flex-row justify-between mt-2">
+            <h6 class="font-bold text-primary"><%= @quiz.title %></h6>
+          </header>
 
-        <p class="h-[120px] flex-grow text-ellipsis overflow-hidden"><%= @quiz.description %></p>
-        <footer class="mt-2 text-sm text-gray-500">
-          <p><%= questions_text(@quiz.questions) %> </p>
-        </footer>
-      </article>
+          <p class="h-[120px] flex-grow text-ellipsis overflow-hidden"><%= @quiz.description %></p>
+          <footer class="mt-2 text-sm text-gray-500">
+            <p><%= questions_text(@quiz.questions) %> </p>
+          </footer>
+        </article>
+      <% end %>
 
     </article>
     """
