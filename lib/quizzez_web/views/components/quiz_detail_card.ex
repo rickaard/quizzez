@@ -9,7 +9,7 @@ defmodule QuizzezWeb.Components.QuizDetailCard do
     assigns = assign_new(assigns, :can_modify, fn -> false end)
 
     ~H"""
-    <article class="group hover:cursor-pointer hover:border-gray-400 flex flex-row border border-solid border-x-gray-200 w-full lg:w-[48%] relative rounded-lg">
+    <article class="group hover:cursor-pointer hover:border-gray-400 flex flex-row border border-solid border-x-gray-200 w-full h-full relative rounded-lg">
 
       <aside class="absolute w-full -top-2">
         <p class="bg-primary-50 text-white px-2 text-sm text-center w-max mx-auto"><%= @quiz.category %></p>
