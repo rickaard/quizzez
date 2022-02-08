@@ -3,7 +3,13 @@ defmodule QuizzezWeb.CategoryControllerTest do
 
   describe "GET /" do
     test "renders categories", %{conn: conn} do
-      conn = get(conn, Routes.controller_path(conn, :index))
+      categories = ~w[food geography history math misc music programming science workout]
+
+      Enum.each(categories, fn category ->
+        insert(:quiz, category: category)
+      end)
+
+      conn = get(conn, Routes.category_path(conn, :index))
 
       response = html_response(conn, 200)
       assert response =~ "Food"
