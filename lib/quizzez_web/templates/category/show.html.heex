@@ -1,9 +1,9 @@
 <section class="container mt-20 mb-8 px-6 mx-auto max-w-4xl">
   <article class="flex flex-row flex-wrap gap-8 justify-between mt-6">
-    <%= for category <- @categories do %>
-        <%= link to: Routes.category_path(@conn, :show, category) do %>
-          <%= String.capitalize(category) %>
-        <% end %>
+    <%= for quiz <- @quizzes do %>
+        <div class="w-full lg:w-[48%]">
+          <QuizzezWeb.Components.QuizDetailCard.card quiz={quiz} />
+        </div>
     <% end %>
   </article>
   <article class="column">

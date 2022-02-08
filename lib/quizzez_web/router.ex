@@ -53,7 +53,7 @@ defmodule QuizzezWeb.Router do
       resources("/participation", Quiz.ParticipationController, only: ~w[show]a, singleton: true)
     end
 
-    resources("/categories", CategoryController)
+    resources("/categories", CategoryController, only: ~w[index show]a, param: "category")
 
     post("/login", SessionController, :create)
 
