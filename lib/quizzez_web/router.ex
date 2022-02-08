@@ -5,7 +5,6 @@ defmodule QuizzezWeb.Router do
     plug(:accepts, ["html"])
     plug(:fetch_session)
     plug(:fetch_live_flash)
-    plug(:put_root_layout, {QuizzezWeb.LayoutView, :root})
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
   end
@@ -50,7 +49,10 @@ defmodule QuizzezWeb.Router do
   scope "/", QuizzezWeb do
     pipe_through [:browser, :guardian]
 
-    resources("/quiz", QuizController)
+    resources("/quiz", QuizController, only: ~w[new edit]a) do
+      resources("/participation", Quiz.ParticipationController, only: ~w[show]a, singleton: true)
+    end
+
     post("/login", SessionController, :create)
 
     resources("/", PageController)

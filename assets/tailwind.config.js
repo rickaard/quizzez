@@ -11,7 +11,16 @@ module.exports = {
     extend: {
       colors: {
         primary: "#635994",
-        "primary-50": "#6359947d",
+        "primary-50": "#afabc8",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { transform: "translateX(500px)" },
+          "100%": { transform: "translateX(0)" },
+        },
+      },
+      animation: {
+        fadeIn: "fadeIn 0.2s linear 1",
       },
     },
   },

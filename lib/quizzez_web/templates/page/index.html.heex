@@ -1,12 +1,12 @@
 <section class="hero">
 </section>
 
-<section class="row">
-  <article class="column">
+<section class="container mt-20 mb-8 px-6 mx-auto max-w-4xl">
+  <article class="flex flex-row flex-wrap gap-8 justify-between mt-6">
     <%= for quiz <- @quizzes do %>
-      <h3>Title: <%= quiz.title %></h3>
-      <p>Description: <%= quiz.description %></p>
-      <p>Amount of questions: <%= Enum.count(quiz.questions) %></p>
+        <div class="w-full lg:w-[48%]">
+          <QuizzezWeb.Components.QuizDetailCard.card quiz={quiz} />
+        </div>
     <% end %>
   </article>
   <article class="column">

@@ -100,4 +100,56 @@ defmodule Quizzez.QuizTest do
       assert %Ecto.Changeset{} = Quizzes.change_quiz(quiz)
     end
   end
+
+  describe "quiz participation" do
+    test "calculates correct answers" do
+      answer_1 = insert(:answer, is_correct: false, text: "This is false")
+      answer_2 = insert(:answer, is_correct: true, text: "This is correct")
+      answer_3 = insert(:answer, is_correct: false, text: "This is also false")
+
+      question_1 =
+        insert(:question,
+          text: "This is the first question",
+          answers: [answer_1, answer_2, answer_3]
+        )
+
+      answer_3 = insert(:answer, is_correct: false, text: "This is also false")
+      answer_4 = insert(:answer, is_correct: false, text: "This is also false")
+      answer_5 = insert(:answer, is_correct: true, text: "This is also correct")
+
+      question_2 =
+        insert(
+          :question,
+          text: "This is the second question",
+          answers: [answer_3, answer_4, answer_5]
+        )
+
+      answer_6 = insert(:answer, is_correct: false, text: "This is also false")
+      answer_7 = insert(:answer, is_correct: true, text: "This is correct")
+
+      question_3 =
+        insert(
+          :question,
+          text: "This is the third question",
+          answers: [answer_6, answer_7]
+        )
+
+      quiz =
+        insert(
+          :quiz,
+          title: "A simple quiz",
+          description: "A quiz description",
+          user: build(:user),
+          questions: [question_1, question_2, question_3]
+        )
+
+      answers = [
+        %{answer_id: answer_5.id, question_id: question_2.id},
+        %{answer_id: answer_1.id, question_id: question_1.id},
+        %{answer_id: answer_7.id, question_id: question_3.id}
+      ]
+
+      assert 2 = Quizzes.calculate_score(quiz, answers)
+    end
+  end
 end
