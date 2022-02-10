@@ -6,15 +6,15 @@ defmodule QuizzezWeb.CategoryControllerTest do
       conn = get(conn, Routes.category_path(conn, :index))
 
       response = html_response(conn, 200)
-      assert response =~ "Food"
-      assert response =~ "Geography"
-      assert response =~ "History"
-      assert response =~ "Math"
-      assert response =~ "Misc"
-      assert response =~ "Music"
-      assert response =~ "Programming"
-      assert response =~ "Science"
-      assert response =~ "Workout"
+      assert response =~ "FOOD"
+      assert response =~ "GEOGRAPHY"
+      assert response =~ "HISTORY"
+      assert response =~ "MATH"
+      assert response =~ "MISC"
+      assert response =~ "MUSIC"
+      assert response =~ "PROGRAMMING"
+      assert response =~ "SCIENCE"
+      assert response =~ "WORKOUT"
     end
   end
 
