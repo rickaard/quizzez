@@ -99,6 +99,17 @@ defmodule Quizzez.QuizTest do
       quiz = insert(:quiz, user: build(:user))
       assert %Ecto.Changeset{} = Quizzes.change_quiz(quiz)
     end
+
+    test "list_quizzez_with_questions_from_category/1" do
+      user = insert(:user)
+      insert(:quiz, user: user, category: "misc")
+      insert(:quiz, user: user, category: "misc")
+      insert(:quiz, user: user, category: "music")
+
+      assert 2 = length(Quizzes.list_quizzez_with_questions_from_category("misc"))
+      assert 1 = length(Quizzes.list_quizzez_with_questions_from_category("music"))
+      assert [] = Quizzes.list_quizzez_with_questions_from_category("food")
+    end
   end
 
   describe "quiz participation" do

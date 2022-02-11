@@ -39,6 +39,21 @@ defmodule Quizzez.Quizzes do
   end
 
   @doc """
+  Returns a list of quizzez with the same category
+
+  ## Examples
+
+        iex> list_quizzez_with_questions_from_category("misc")
+        [%Quiz{questions: [%Question{}, ...]}, ...]
+  """
+  def list_quizzez_with_questions_from_category(category) do
+    Quiz
+    |> where(category: ^category)
+    |> Repo.all()
+    |> Repo.preload(:questions)
+  end
+
+  @doc """
   Returns a list of quizzes with related questions preloaded aswell as related answers preloaded to the questions
 
   Examples
