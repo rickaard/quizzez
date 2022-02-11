@@ -12,6 +12,6 @@ defmodule QuizzezWeb.CategoryController do
   def show(conn, %{"category" => category} = _params) do
     quizzes = Quizzes.list_quizzez_with_questions_from_category(category)
 
-    render(conn, "show.html", quizzes: quizzes)
+    render(conn, "show.html", quizzes: quizzes, category: category)
   end
 end
