@@ -3,24 +3,22 @@
     <nav class="header-nav">
       <div class="header-logo">
         <a href="/">
-          <span class="header-logo__big">QUIZZ</span><span class="header-logo__small">ez</span>
+          <span class="header-logo__big">QUIZZ</span>
+          <span class="header-logo__small">ez</span>
         </a>
       </div>
-      <ul class="header-nav__items">
-        <%= if QuizzezWeb.Authentication.logged_in?(@conn) do %>
-          <li>
-            <%= link "Profile", to: Routes.profile_path(@conn, :show, QuizzezWeb.Authentication.get_current_user(@conn).id) %>
-          </li>
-          <li>
-            <%= link "Logout", to: Routes.session_path(@conn, :delete), method: :delete %>
-          </li>
+      <%= if QuizzezWeb.Authentication.logged_in?(@conn) do %>
+        <ul class="header-nav__items">
+          <li><%= link "Categories", to: Routes.category_path(@conn, :index) %></li>
+          <li><%= link "Profile", to: Routes.profile_path(@conn, :show, QuizzezWeb.Authentication.get_current_user(@conn).id) %></li>
+          <li><%= link "Logout", to: Routes.session_path(@conn, :delete), method: :delete %></li>
+        </ul>
         <% else %>
-          <li>
-            <%= link "Login", to: Routes.session_path(@conn, :new) %>
-          </li>
-
+        <ul class="header-nav__items">
+          <li><%= link "Categories", to: Routes.category_path(@conn, :index) %></li>
+          <li><%= link "Login", to: Routes.session_path(@conn, :new), class: "bg-primary px-4 py-2 rounded-3xl text-white" %></li>
+        </ul>
         <% end %>
-      </ul>
     </nav>
   </section>
 </header>
