@@ -37,6 +37,7 @@ defmodule QuizzezWeb.CategoryControllerTest do
       conn = get(conn, Routes.category_path(conn, :show, "misc"))
 
       response = html_response(conn, 200)
+      assert response =~ "Oh, no..."
       assert response =~ "No quizzes created for this category yet"
       refute response =~ "misc"
     end

@@ -1,8 +1,12 @@
 <%= if @quizzes == [] do %>
-  <div class="w-full max-w-sm mx-auto mt-12">
+  <div class="w-full max-w-sm mx-auto mt-20">
     <%= SVGHelpers.inline_svg("illustrations/giving-back") %>
   </div>
-  <p class="text-center">No quizzes created for this category yet</p>
+  <div class="mt-6">
+    <p class="text-center text-2xl">Oh, no...</p>
+    <p class="text-center">No quizzes created for this category yet</p>
+    <p class="text-center">We would <span class="text-lg text-red-500 font-bold uppercase">love</span> if you created the first one for us!</p>
+  </div>
 <% else %>
 
   <section class="container mt-20 mb-8 px-6 mx-auto max-w-4xl">
