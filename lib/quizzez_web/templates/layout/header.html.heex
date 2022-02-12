@@ -7,11 +7,26 @@
           <span class="header-logo__small">ez</span>
         </a>
       </div>
-      <%= if QuizzezWeb.Authentication.logged_in?(@conn) do %>
+      <%= if Authentication.logged_in?(@conn) do %>
         <ul class="header-nav__items">
           <li><%= link "Categories", to: Routes.category_path(@conn, :index) %></li>
-          <li><%= link "Profile", to: Routes.profile_path(@conn, :show, QuizzezWeb.Authentication.get_current_user(@conn).id) %></li>
-          <li><%= link "Logout", to: Routes.session_path(@conn, :delete), method: :delete %></li>
+          <li>
+            <div class="flex items-center gap-1 relative cursor-pointer">
+
+              <div id="user-menu" class="flex flex-row items-center gap-1">
+                <i class="max-w-[20px] inline-block"><%= SVGHelpers.inline_svg("icons/user") %></i>
+                <span><%= user_name(@conn) %></span>
+                <i class="max-w-[12px] inline-block"><%= SVGHelpers.inline_svg("icons/chevron-down") %></i>
+              </div>
+
+              <div id="user-menu__dropdown" class="invisible absolute right-0 translate-y-[76px] bg-white p-2 rounded-xl border border-solid shadow-sm transition min-w-[180px] flex flex-col z-10">
+                <%= link "Profile", to: Routes.profile_path(@conn, :show, QuizzezWeb.Authentication.get_current_user(@conn).id), class: "hover:bg-gray-50 py-2 px-1" %>
+                <%= link "Logout", to: Routes.session_path(@conn, :delete), method: :delete, class: "hover:bg-gray-50 py-2 px-1" %>
+              </div>
+
+            </div>
+          </li>
+
         </ul>
         <% else %>
         <ul class="header-nav__items">
