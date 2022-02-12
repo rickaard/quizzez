@@ -3,6 +3,7 @@ defmodule QuizzezWeb.Components.QuizDetailCard do
   A card component to be used to show details about a Quiz
   """
   use Phoenix.Component
+  import Phoenix.HTML.Link
   alias QuizzezWeb.Router.Helpers, as: Routes
 
   def card(assigns) do
@@ -17,9 +18,11 @@ defmodule QuizzezWeb.Components.QuizDetailCard do
 
       <%= if @can_modify do %>
         <aside class="absolute -top-3 -right-3 border border-solid border-gray-300 rounded-full bg-white shadow-sm cursor-pointer hover:bg-gray-300">
-          <i class="">
-            <QuizzezWeb.Components.Icons.more_icon />
-          </i>
+          <i class="quiz-details__btn"><QuizzezWeb.Components.Icons.more_icon /></i>
+          <div class="quiz-details__menu invisible absolute right-6 lg:translate-y-[-6px] bg-white p-2 rounded-xl border border-solid shadow-sm transition min-w-[180px] flex flex-col z-10">
+            <%= link "Edit", to: "#", class: "hover:bg-gray-50 py-2 px-1" %>
+            <%= link "Delete", to: "#", class: "hover:bg-gray-50 py-2 px-1" %>
+          </div>
         </aside>
       <% end %>
 

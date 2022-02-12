@@ -1,8 +1,7 @@
 import "../css/app.css";
 import "phoenix_html";
 import { handleMenuClick } from "./utils/user-menu";
-
-// Establish Phoenix Socket and LiveView configuration.
+import { handleQuizDetailsClick } from "./utils/quiz-details-menu";
 import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
 import topbar from "../vendor/topbar";
@@ -23,4 +22,8 @@ window.addEventListener("phx:page-loading-stop", (info) => topbar.hide());
 liveSocket.connect();
 
 window.liveSocket = liveSocket;
-handleMenuClick();
+
+window.addEventListener("DOMContentLoaded", () => {
+  handleMenuClick();
+  handleQuizDetailsClick();
+});
