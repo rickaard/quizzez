@@ -18,16 +18,20 @@ defmodule Quizzez.Quizzes.Question do
     |> cast(attrs, [:text])
     |> validate_required([:text])
     |> cast_assoc(:answers, required: true)
-
-    # |> has_one_correct_answer()
+    |> has_one_correct_answer()
   end
 
   def has_one_correct_answer(changeset) do
-    # case Enum.any?(answers, fn answer -> answer.is_correct == true end) do
-    #   true -> changeset
-    #   _ -> add_error(changeset, :answers, "One answer must be correct")
-    # end
-    inspect(changeset, label: "has_one_correct_answer")
-    changeset
+    case correct_answers_amount(changeset) do
+      0 -> add_error(changeset, :question, "does not have any correct answer")
+      1 -> changeset
+      _ -> add_error(changeset, :question, "must only have one correct answer")
+    end
+  end
+
+  def correct_answers_amount(changeset) do
+    answers = get_field(changeset, :answers)
+
+    Enum.count(answers, & &1.is_correct)
   end
 end
