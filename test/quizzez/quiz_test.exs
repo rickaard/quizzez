@@ -67,6 +67,37 @@ defmodule Quizzez.QuizTest do
       assert {:error, %Ecto.Changeset{}} = Quizzes.create_quiz(@invalid_attrs)
     end
 
+    test "create quiz with a question with more than 1 correct answer returns error changeset" do
+      user = insert(:user)
+
+      question = %{
+        text: "This is a question",
+        answers: [
+          %{text: "This is a correct answer", is_correct: true},
+          %{text: "This is also a correct answer", is_correct: true}
+        ]
+      }
+
+      quiz = %{
+        title: "quiz title",
+        description: "some description",
+        category: "misc",
+        questions: [question]
+      }
+
+      changeset =
+        user
+        |> Ecto.build_assoc(:quizzes)
+        |> Quiz.changeset(quiz)
+
+      require IEx
+      IEx.pry()
+
+      refute changeset.valid?
+      assert {:error, changeset} = Repo.insert(changeset)
+      assert [] = Repo.all(Quiz)
+    end
+
     test "update_quiz/2 with valid data updates the quiz" do
       question = insert(:question)
       quiz = insert(:quiz, questions: [question])
