@@ -67,6 +67,70 @@ defmodule Quizzez.QuizTest do
       assert {:error, %Ecto.Changeset{}} = Quizzes.create_quiz(@invalid_attrs)
     end
 
+    test "create quiz with a question without any correct answer returns error changeset" do
+      user = insert(:user)
+
+      question = %{
+        text: "This is a question",
+        answers: [
+          %{text: "This is a false answer", is_correct: false},
+          %{text: "This is also a false answer", is_correct: false}
+        ]
+      }
+
+      quiz = %{
+        title: "quiz title",
+        description: "some description",
+        category: "misc",
+        questions: [question]
+      }
+
+      changeset =
+        user
+        |> Ecto.build_assoc(:quizzes)
+        |> Quiz.changeset(quiz)
+
+      refute changeset.valid?
+
+      assert %{questions: [%{question: ["does not have any correct answer"]}]} =
+               errors_on(changeset)
+
+      assert {:error, _} = Repo.insert(changeset)
+      assert [] = Repo.all(Quiz)
+    end
+
+    test "create quiz with a question with more than 1 correct answer returns error changeset" do
+      user = insert(:user)
+
+      question = %{
+        text: "This is a question",
+        answers: [
+          %{text: "This is a correct answer", is_correct: true},
+          %{text: "This is also a correct answer", is_correct: true}
+        ]
+      }
+
+      quiz = %{
+        title: "quiz title",
+        description: "some description",
+        category: "misc",
+        questions: [question]
+      }
+
+      changeset =
+        user
+        |> Ecto.build_assoc(:quizzes)
+        |> Quiz.changeset(quiz)
+
+      refute changeset.valid?
+
+      assert %{questions: [%{question: ["must only have one correct answer"]}]} =
+               errors_on(changeset)
+
+      assert {:error, _} = Repo.insert(changeset)
+      assert [] = Repo.all(Quiz)
+    end
+
     test "update_quiz/2 with valid data updates the quiz" do
       question = insert(:question)
       quiz = insert(:quiz, questions: [question])
