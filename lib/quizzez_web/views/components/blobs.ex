@@ -33,4 +33,12 @@ defmodule QuizzezWeb.Components.Blobs do
       </svg>
     """
   end
+
+  def ligh_grey(assigns) do
+    ~H"""
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" id="blobSvg">
+      <path id="blob" d="M410.5,318Q358,386,285.5,398Q213,410,121,383Q29,356,56.5,263Q84,170,140,91Q196,12,271,71Q346,130,404.5,190Q463,250,410.5,318Z" fill="#eff0f0"></path>
+    </svg>
+    """
+  end
 end

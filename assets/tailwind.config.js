@@ -12,6 +12,7 @@ module.exports = {
       colors: {
         primary: "#635994",
         "primary-50": "#afabc8",
+        "light-silver": "#f9fafb",
       },
       keyframes: {
         fadeIn: {

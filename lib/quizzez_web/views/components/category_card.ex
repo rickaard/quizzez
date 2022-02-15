@@ -10,7 +10,7 @@ defmodule QuizzezWeb.Components.CategoryCard do
     ~H"""
       <article class="group flex flex-col w-full lg:w-[31%] h-full relative rounded-lg">
         <%= Phoenix.HTML.Link.link to: Routes.category_path(QuizzezWeb.Endpoint, :show, @category), class: "hover:cursor-pointer" do %>
-          <div class="h-full min-w-[130px] max-h-[200px] flex items-center bg-primary bg-opacity-10 rounded-lg overflow-hidden">
+          <div class="h-full min-w-[130px] max-h-[200px] flex items-center bg-primary bg-opacity-80 rounded-lg overflow-hidden">
             <img class="group-hover:scale-125 transition" src={Routes.static_path(QuizzezWeb.Endpoint, quiz_illustration_path(@category))} alt=""/>
           </div>
         <% end %>

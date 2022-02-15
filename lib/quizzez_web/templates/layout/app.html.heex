@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <%= render QuizzezWeb.LayoutView, "_head.html", assigns %>
-<body>
+<body class="relative overflow-x-hidden">
+  <div class="absolute -z-10 left-[-310px] top-[260px] w-[830px]">
+    <QuizzezWeb.Components.Blobs.ligh_grey />
+  </div>
+  <div class="absolute -z-10 right-[-210px] top-[100px] w-[390px]">
+    <QuizzezWeb.Components.Blobs.ligh_grey />
+  </div>
   <%= render QuizzezWeb.LayoutView, "header.html", assigns %>
   <main class="container mx-auto">
     <p class="alert alert-info max-w-4xl mx-auto" role="alert"><%= get_flash(@conn, :info) %></p>
