@@ -4,8 +4,6 @@
 @import "./variables.css";
 
 /* LAYOUTS */
-
-@import "./layout/header.css";
 @import "./layout//global.css";
 
 /* PHENOIX STUFF */
