@@ -40,9 +40,11 @@
 
           <header class="form-group__heading flex">
             <h4>Question #<%= question_number(question) %></h4>
-            <div class="action">
-              <button type="button" phx-click="remove_question" phx-value-question-id={question.id} class="remove-btn icon-btn" title="Delete question">✖</button>
-            </div>
+            <%= if question_amount(assigns) > 1 do %>
+              <div class="action">
+                <button type="button" phx-click="remove_question" phx-value-question-id={question.id} class="remove-btn icon-btn" title="Delete question">✖</button>
+              </div>
+            <% end %>
           </header>
 
           <div class="form-group__body">
@@ -55,7 +57,9 @@
               <div class="item">
                 <%= text_input answer, :text, placeholder: "Enter an answer", phx_debounce: "blur" %>
                 <%= checkbox answer, :is_correct, title: "Mark as correct answer" %>
-                <button type="button" phx-click="remove_answer" phx-value-answer-id={answer.id} class="remove-btn icon-btn" title="Delete answer">✖</button>
+                <%= if answers_amount(assigns, question.id) > 1 do %>
+                  <button type="button" phx-click="remove_answer" phx-value-answer-id={answer.id} class="remove-btn icon-btn" title="Delete answer">✖</button>
+                <% end %>
               </div>
             <% end %>
 
