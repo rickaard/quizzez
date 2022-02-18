@@ -43,6 +43,7 @@
   transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
   display: flex;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .form-group__body input[type="text"],
