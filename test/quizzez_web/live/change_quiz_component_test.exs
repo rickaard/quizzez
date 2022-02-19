@@ -70,5 +70,31 @@ defmodule QuizzezWeb.ChangeQuizComponentTest do
       assert html =~ "This is an answer!"
       assert html =~ "This is a correct answer!"
     end
+
+    test "adds an answer", %{conn: conn} do
+      user = insert(:user)
+
+      {:ok, view, html} = live_isolated(conn, ChangeQuizComponent, session: %{"user" => user})
+
+      assert html =~ ~s(<input id="quiz_questions_0_answers_0_text")
+      assert html =~ ~s(<input id="quiz_questions_0_answers_1_text")
+      refute html =~ ~s(<input id="quiz_questions_0_answers_2_text")
+
+      html = render_click(view, :add_answer, %{"question-id" => "quiz_questions_0"})
+
+      assert html =~ ~s(<input id="quiz_questions_0_answers_2_text")
+    end
+
+    test "deletes an answer", %{conn: conn} do
+      user = insert(:user)
+
+      {:ok, view, html} = live_isolated(conn, ChangeQuizComponent, session: %{"user" => user})
+
+      assert html =~ ~s(<input id="quiz_questions_0_answers_0_text")
+      assert html =~ ~s(<input id="quiz_questions_0_answers_1_text")
+
+      html = render_click(view, :remove_answer, %{"answer-id" => "quiz_questions_0_answers_1"})
+      refute html =~ ~s(<input id="quiz_questions_0_answers_1_text")
+    end
   end
 end
