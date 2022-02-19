@@ -1,5 +1,5 @@
 defmodule QuizzezWeb.ProfileControllerTest do
-  use QuizzezWeb.ConnCase
+  use QuizzezWeb.ConnCase, async: true
 
   describe "GET :show" do
     test "redirects to start page if user is not logged in", %{conn: conn} do

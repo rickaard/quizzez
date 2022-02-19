@@ -1,5 +1,5 @@
 defmodule QuizzezWeb.QuizControllerTest do
-  use QuizzezWeb.ConnCase
+  use QuizzezWeb.ConnCase, async: true
 
   describe "GET /" do
     test "renders `create new quiz` form for logged in user", %{conn: conn} do

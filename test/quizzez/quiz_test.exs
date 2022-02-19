@@ -1,5 +1,5 @@
 defmodule Quizzez.QuizTest do
-  use Quizzez.DataCase
+  use Quizzez.DataCase, async: true
 
   alias Quizzez.Quizzes
 
