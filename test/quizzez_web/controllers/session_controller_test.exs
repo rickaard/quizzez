@@ -1,5 +1,5 @@
 defmodule QuizzezWeb.SessionControllerTest do
-  use QuizzezWeb.ConnCase
+  use QuizzezWeb.ConnCase, async: true
 
   describe "GET /" do
     test "renders login page", %{conn: conn} do

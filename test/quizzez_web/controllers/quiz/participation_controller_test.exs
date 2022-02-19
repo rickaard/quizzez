@@ -1,5 +1,5 @@
 defmodule QuizzezWeb.Survey.ParticipationControllerTest do
-  use QuizzezWeb.ConnCase
+  use QuizzezWeb.ConnCase, async: true
 
   describe "GET /" do
     test "renders quiz details", %{conn: conn} do

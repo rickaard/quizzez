@@ -1,5 +1,5 @@
 defmodule QuizzezWeb.RegistrationControllerTest do
-  use QuizzezWeb.ConnCase
+  use QuizzezWeb.ConnCase, async: true
 
   alias Quizzez.Accounts.User
   alias Quizzez.Repo

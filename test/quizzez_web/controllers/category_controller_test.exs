@@ -1,5 +1,5 @@
 defmodule QuizzezWeb.CategoryControllerTest do
-  use QuizzezWeb.ConnCase
+  use QuizzezWeb.ConnCase, async: true
 
   describe "GET /" do
     test "renders categories", %{conn: conn} do

@@ -16,15 +16,11 @@ defmodule QuizzezWeb.ChangeQuizComponent do
   alias QuizzezWeb.SVGHelpers
 
   def mount(_params, %{"user" => user} = _session, socket) do
-    quiz = empty_full_quiz()
-
-    changeset =
-      Quizzes.change_quiz(quiz)
-      |> Ecto.Changeset.put_assoc(:questions, quiz.questions)
+    quiz_changeset = empty_full_quiz()
 
     socket =
       socket
-      |> assign(:changeset, changeset)
+      |> assign(:changeset, quiz_changeset)
       |> assign(:user_id, user.id)
       |> assign(:selected_category, nil)
 
@@ -120,12 +116,20 @@ defmodule QuizzezWeb.ChangeQuizComponent do
 
   def handle_event("remove_question", params, socket) do
     %{"question-id" => "quiz_questions_" <> index} = params
+    {question_index, _} = Integer.parse(index)
 
-    IO.puts("")
-    IO.puts("Reming question with index: #{index}")
-    IO.puts("")
+    quiz_changeset = socket.assigns.changeset
 
-    {:noreply, socket}
+    updated_questions =
+      quiz_changeset
+      |> Ecto.Changeset.get_field(:questions)
+      |> List.delete_at(question_index)
+
+    changeset =
+      quiz_changeset
+      |> Ecto.Changeset.put_assoc(:questions, updated_questions)
+
+    {:noreply, assign(socket, changeset: changeset)}
   end
 
   def handle_event("remove_answer", %{"answer-id" => answer_params} = _parmas, socket) do
@@ -140,18 +144,19 @@ defmodule QuizzezWeb.ChangeQuizComponent do
   end
 
   defp empty_full_quiz do
-    %Quiz{
-      questions: [
-        %Question{
-          answers: [
-            %Answer{},
-            %Answer{},
-            %Answer{},
-            %Answer{}
-          ]
-        }
-      ]
-    }
+    quiz = %Quiz{}
+    quiz_changeset = Quizzes.change_quiz(quiz)
+
+    questions = [
+      %Question{
+        answers: [
+          %Answer{},
+          %Answer{}
+        ]
+      }
+    ]
+
+    Ecto.Changeset.put_assoc(quiz_changeset, :questions, questions)
   end
 
   defp question_number(question) do
@@ -160,5 +165,22 @@ defmodule QuizzezWeb.ChangeQuizComponent do
     {number, _} = Integer.parse(index)
 
     Integer.to_string(number + 1)
+  end
+
+  defp question_amount(%{changeset: changeset} = _assigns) do
+    changeset
+    |> Ecto.Changeset.get_field(:questions)
+    |> Enum.count()
+  end
+
+  defp answers_amount(%{changeset: changeset} = _assigns, question_index) do
+    "quiz_questions_" <> index = question_index
+    {question_index, _} = Integer.parse(index)
+
+    changeset
+    |> Ecto.Changeset.get_field(:questions)
+    |> Enum.at(question_index)
+    |> Map.get(:answers)
+    |> Enum.count()
   end
 end
