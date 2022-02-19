@@ -173,8 +173,8 @@ defmodule QuizzezWeb.ChangeQuizComponent do
     |> Enum.count()
   end
 
-  defp answers_amount(%{changeset: changeset} = _assigns, question_id) do
-    "quiz_questions_" <> index = question_id
+  defp answers_amount(%{changeset: changeset} = _assigns, question_index) do
+    "quiz_questions_" <> index = question_index
     {question_index, _} = Integer.parse(index)
 
     changeset
