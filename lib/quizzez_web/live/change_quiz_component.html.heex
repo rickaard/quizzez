@@ -2,7 +2,7 @@
 
 <div class="form-wrapper w-4/5 mb-4">
   <.form let={quiz} for={@changeset} phx-change="validate" phx-submit="save">
-    <div class="form-group">
+    <div class="form-group animate-fadeIn">
       <header class="form-group__heading flex">
         <h4>Quiz Info</h4>
         <div class="action">
@@ -36,7 +36,7 @@
     </div>
 
     <%= inputs_for quiz, :questions, fn question -> %>
-        <div class="form-group question">
+        <div class="form-group question animate-fadeIn">
 
           <header class="form-group__heading flex">
             <h4>Question #<%= question_number(question) %></h4>
@@ -54,7 +54,7 @@
             </div>
 
             <%= inputs_for question, :answers, fn answer -> %>
-              <div class="item">
+              <div class="item animate-fadeIn">
                 <%= text_input answer, :text, placeholder: "Enter an answer", phx_debounce: "blur" %>
                 <%= checkbox answer, :is_correct, title: "Mark as correct answer" %>
                 <%= if answers_amount(assigns, question.id) > 1 do %>
