@@ -96,5 +96,32 @@ defmodule QuizzezWeb.ChangeQuizComponentTest do
       html = render_click(view, :remove_answer, %{"answer-id" => "quiz_questions_0_answers_1"})
       refute html =~ ~s(<input id="quiz_questions_0_answers_1_text")
     end
+
+    test "keeps content in other answers when deleting an answer", %{conn: conn} do
+      user = insert(:user)
+
+      {:ok, view, _html} = live_isolated(conn, ChangeQuizComponent, session: %{"user" => user})
+
+      question_params = %{
+        "questions" => %{
+          "0" => %{
+            "text" => "What is the first question?",
+            "answers" => %{
+              "0" => %{"is_correct" => "false", "text" => "I want to remove this answer"},
+              "1" => %{"is_correct" => "true", "text" => "I want this answer to still be here"}
+            }
+          }
+        }
+      }
+
+      html = render_blur(view, :validate, %{"quiz" => question_params})
+      assert html =~ "I want to remove this answer"
+
+      html = render_click(view, :remove_answer, %{"answer-id" => "quiz_questions_0_answers_0"})
+
+      assert html =~ "I want this answer to still be here"
+      refute html =~ "I want to remove this answer"
+      refute html =~ ~s(<input id="quiz_questions_0_answers_1_text")
+    end
   end
 end
