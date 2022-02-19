@@ -133,14 +133,25 @@ defmodule QuizzezWeb.ChangeQuizComponent do
   end
 
   def handle_event("remove_answer", %{"answer-id" => answer_params} = _parmas, socket) do
+    quiz_changeset = socket.assigns.changeset
     [_, _, question_index, _, answer_index] = String.split(answer_params, "_")
+    {question_index, _} = Integer.parse(question_index)
+    {answer_index, _} = Integer.parse(answer_index)
 
-    IO.puts("")
-    IO.puts("Removing answer with index: #{answer_index}")
-    IO.puts("From question with index: #{question_index}")
-    IO.puts("")
+    all_questions = Ecto.Changeset.get_field(quiz_changeset, :questions)
 
-    {:noreply, socket}
+    {_prev, updated_question} =
+      all_questions
+      |> Enum.at(question_index)
+      |> Map.get_and_update(:answers, fn answers_list ->
+        {answers_list, List.delete_at(answers_list, answer_index)}
+      end)
+
+    updated_questions = List.replace_at(all_questions, question_index, updated_question)
+
+    changeset = Ecto.Changeset.put_assoc(quiz_changeset, :questions, updated_questions)
+
+    {:noreply, assign(socket, changeset: changeset)}
   end
 
   defp empty_full_quiz do
