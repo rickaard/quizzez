@@ -1,0 +1,1 @@
+call "%~dp0\quizzez" eval Quizzez.Release.migrate
