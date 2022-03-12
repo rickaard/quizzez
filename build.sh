@@ -14,3 +14,6 @@ MIX_ENV=prod mix release --overwrite
 
 # expose ENV variables
 source .env
+
+# Run migrations
+_build/prod/rel/quizzez/bin/quizzez eval "Quizzez.Release.migrate"
