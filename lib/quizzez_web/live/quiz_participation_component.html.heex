@@ -1,7 +1,7 @@
 <section class="container mt-20 px-6 mx-auto flex flex-col max-w-4xl">
   <%= if @status == :unstarted do %>
-    <h2 class="text-6xl text-white font-bold mb-4 text-center"><%= @quiz.title %></h2>
-    <div class="w-max flex flex-col gap-2 mx-auto my-4 mb-8">
+    <h2 class="text-4xl lg:text-6xl text-6xl text-white font-bold mb-4 text-center"><%= @quiz.title %></h2>
+    <div class="flex flex-col gap-2 mx-auto my-4 mb-8">
       <p class="text-2xl text-gray-300 text-center"><%= @quiz.description %></p>
       <p class="text-gray-400"><%= question_amount_text(@quiz.questions) %></p>
     </div>
@@ -10,7 +10,7 @@
   <% end %>
 
   <%= if @status == :started do %>
-    <h3 class="text-6xl text-white font-bold mb-4 text-center"><%= @current_question.text %></h3>
+    <h3 class="text-4xl lg:text-6xl text-white font-bold mb-4 text-center break-normal"><%= @current_question.text %></h3>
       <ul class="flex flex-row flex-wrap gap-2 md:gap-8 justify-between mt-16 animate-fadeIn">
         <%= for answer <- @current_question.answers do %>
           <li class="w-full md:basis-5/12">
@@ -23,22 +23,23 @@
 
     <div class="flex justify-between mt-20 before:content-[''] before:block before:h-[1px] before:bg-gray-400 before:w-full before:absolute relative before:top-4">
       <%= if not first_question?(assigns) do %>
-        <button class="group uppercase flex items-center justify-center border border-solid border-white min-w-[200px] px-4 py-2 mt-8 mb-4" phx-click="prev-question">
-          <i class="w-5 mr-0.5 transition group-hover:-translate-x-1"><%= SVGHelpers.inline_svg("icons/arrow-left") %></i> Previous question
+        <button class="group text-xs lg:text-sm uppercase flex items-center justify-center border border-solid border-white lg:min-w-[200px] px-4 py-2 mt-8 mb-4" phx-click="prev-question">
+          <i class="w-5 mr-0.5 transition group-hover:-translate-x-1"><%= SVGHelpers.inline_svg("icons/arrow-left") %></i>
+          Previous
         </button>
       <% end %>
 
       <%= if last_question?(assigns) do %>
         <button
-          class="group flex items-center justify-center cursor-pointer uppercase border border-solid border-white min-w-[200px] px-4 py-2 mt-8 mb-4 ml-auto disabled:border-gray-400 disabled:text-gray-400 disabled:cursor-not-allowed"
+          class="group text-xs lg:text-sm flex items-center justify-center cursor-pointer uppercase border border-solid border-white lg:min-w-[200px] px-4 py-2 mt-8 mb-4 ml-auto disabled:border-gray-400 disabled:text-gray-400 disabled:cursor-not-allowed"
           phx-click="calculate-score"
           disabled={if not question_answered?(assigns), do: true}
         >
-          Show score <i class="w-5 ml-0.5 transition group-hover:translate-x-1 disabled:pointer-events-none"><%= SVGHelpers.inline_svg("icons/academic-cap") %></i>
+          Score <i class="w-5 ml-0.5 transition group-hover:translate-x-1 disabled:pointer-events-none"><%= SVGHelpers.inline_svg("icons/academic-cap") %></i>
         </button>
       <% else %>
-        <button class="group flex items-center justify-center cursor-pointer uppercase border border-solid border-white min-w-[200px] px-4 py-2 mt-8 mb-4 ml-auto disabled:border-gray-400 disabled:text-gray-400 disabled:cursor-not-allowed" phx-click="next-question" disabled={if not question_answered?(assigns), do: true}>
-          Next question <i class="w-5 ml-0.5 transition group-hover:translate-x-1"><%= SVGHelpers.inline_svg("icons/arrow-right") %></i>
+        <button class="group text-xs lg:text-sm flex items-center justify-center cursor-pointer uppercase border border-solid border-white lg:min-w-[200px] px-4 py-2 mt-8 mb-4 ml-auto disabled:border-gray-400 disabled:text-gray-400 disabled:cursor-not-allowed" phx-click="next-question" disabled={if not question_answered?(assigns), do: true}>
+          Next <i class="w-5 ml-0.5 transition group-hover:translate-x-1"><%= SVGHelpers.inline_svg("icons/arrow-right") %></i>
         </button>
       <% end %>
     </div>
