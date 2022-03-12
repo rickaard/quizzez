@@ -4,6 +4,10 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: {System, :get_env, ["GOOGLE_CLIENT_ID"]},
   client_secret: {System, :get_env, ["GOOGLE_CLIENT_SECRET"]}
 
+if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
+  config :quizzez, QuizzezWeb.Endpoint, server: true
+end
+
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration
@@ -38,11 +42,11 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  host = System.get_env("PHX_HOST") || "example.com"
+  host = System.get_env("PHX_HOST") || "localhost"
   port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :quizzez, QuizzezWeb.Endpoint,
-    url: [host: host, port: 443],
+    url: [host: host, port: port],
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
