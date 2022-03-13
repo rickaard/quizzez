@@ -15,7 +15,7 @@
 
               <div id="user-menu" class="flex flex-row items-center gap-1">
                 <i class="max-w-[20px] inline-block"><%= SVGHelpers.inline_svg("icons/user") %></i>
-                <span><%= user_name(@conn) %></span>
+                <span class="hidden sm:block"><%= user_name(@conn) %></span>
                 <i class="max-w-[12px] inline-block"><%= SVGHelpers.inline_svg("icons/chevron-down") %></i>
               </div>
 
