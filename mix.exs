@@ -58,7 +58,8 @@ defmodule Quizzez.MixProject do
       {:guardian, "~> 2.0"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:ex_machina, "~> 2.7.0", only: :test},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:metatags, "~> 0.3.2"}
     ]
   end
 
