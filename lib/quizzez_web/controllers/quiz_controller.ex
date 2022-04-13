@@ -11,13 +11,17 @@ defmodule QuizzezWeb.QuizController do
     changeset = Quiz.changeset(%Quiz{}, %{})
     user = Authentication.get_current_user(conn)
 
-    render(conn, "new.html", changeset: changeset, user: user)
+    conn
+    |> Metatags.put("title", "Create new quiz")
+    |> render("new.html", changeset: changeset, user: user)
   end
 
   def edit(conn, %{"id" => quiz_id} = _params) do
     quiz_changeset = Quizzes.get_quiz!(quiz_id) |> Quizzes.change_quiz()
     user = Authentication.get_current_user(conn)
 
-    render(conn, "new.html", changeset: quiz_changeset, user: user)
+    conn
+    |> Metatags.put("title", "Edit quiz")
+    |> render("new.html", changeset: quiz_changeset, user: user)
   end
 end

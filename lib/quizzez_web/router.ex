@@ -7,6 +7,16 @@ defmodule QuizzezWeb.Router do
     plug(:fetch_live_flash)
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
+
+    plug(Metatags.Plug,
+      sitename: "Quizzez",
+      title_separator: "-",
+      default_tags: %{
+        "title" => "Home",
+        "description" => "A platform for taking a quiz and creating your own quizzes",
+        "keywords" => ["quiz", "quizzes", "quiz-platform"]
+      }
+    )
   end
 
   pipeline :guardian do

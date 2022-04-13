@@ -39,7 +39,7 @@ defmodule QuizzezWeb.CategoryControllerTest do
       response = html_response(conn, 200)
       assert response =~ "Oh, no..."
       assert response =~ "No quizzes created for this category yet"
-      refute response =~ "misc"
+      refute response =~ "All quizzes for misc"
     end
   end
 end
