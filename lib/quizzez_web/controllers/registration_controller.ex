@@ -9,10 +9,10 @@ defmodule QuizzezWeb.RegistrationController do
   def new(conn, _params) do
     changeset = Accounts.change_user()
 
-    render(conn, "new.html",
-      changeset: changeset,
-      action: Routes.registration_path(conn, :create)
-    )
+    conn
+    |> Metatags.put("title", "Registrate account")
+    |> Metatags.put("description", "Create your own account at quizzez.app")
+    |> render("new.html", changeset: changeset, action: Routes.registration_path(conn, :create))
   end
 
   def create(conn, %{"user" => user_params}) do

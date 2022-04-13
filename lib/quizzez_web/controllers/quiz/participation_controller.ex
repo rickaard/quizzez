@@ -10,6 +10,8 @@ defmodule QuizzezWeb.Quiz.ParticipationController do
     case Quizzes.get_quiz_with_questions_and_answers(quiz_id) do
       quiz = %Quiz{} ->
         conn
+        |> Metatags.put("title", "#{quiz.title}")
+        |> Metatags.put("description", ~s(Try out the quiz "#{quiz.title}" at quizzez.app))
         |> render("show.html", quiz: quiz)
 
       nil ->

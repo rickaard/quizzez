@@ -12,7 +12,11 @@ defmodule QuizzezWeb.SessionController do
       redirect(conn, to: Routes.profile_path(conn, :show, user.id))
     else
       changeset = Accounts.change_user()
-      render(conn, "new.html", changeset: changeset, action: Routes.session_path(conn, :create))
+
+      conn
+      |> Metatags.put("title", "Login")
+      |> Metatags.put("description", "Login to you account at quizzez.app")
+      |> render("new.html", changeset: changeset, action: Routes.session_path(conn, :create))
     end
   end
 

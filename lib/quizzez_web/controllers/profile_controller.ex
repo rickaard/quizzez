@@ -12,6 +12,7 @@ defmodule QuizzezWeb.ProfileController do
     case user do
       user = %User{} ->
         conn
+        |> Metatags.put("title", "Profile")
         |> render("show.html", user: user)
 
       nil ->
