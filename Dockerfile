@@ -54,16 +54,14 @@ COPY priv priv
 # your Elixir templates, you will need to move the asset compilation
 # step down so that `lib` is available.
 # compile assets
+COPY assets assets
+
 RUN mix assets.deploy
 
 RUN mix compile
 
-COPY assets assets
-
 # Compile the release
 COPY lib lib
-
-
 
 # Changes to config/runtime.exs don't require recompiling the code
 COPY config/runtime.exs config/
