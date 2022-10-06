@@ -20,8 +20,7 @@ defmodule QuizzezWeb.Endpoint do
     at: "/",
     from: :quizzez,
     gzip: false,
-    only:
-      ~w(assets fonts images favicon.ico robots.txt apple-touch-icon.png favicon-32x32.png favicon-16x16.png manifest.json)
+    only: ~w(assets fonts images favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
