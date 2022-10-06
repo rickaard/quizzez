@@ -12,13 +12,8 @@
 #   - https://pkgs.org/ - resource for finding needed packages
 #   - Ex: hexpm/elixir:1.13.2-erlang-24.1.3-debian-bullseye-20210902-slim
 #
-
-ARG ELIXIR_VERSION=1.13.2
-ARG OTP_VERSION=24.1.6
-ARG DEBIAN_VERSION=bullseye-20210902-slim
-
-ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
-ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
+ARG BUILDER_IMAGE="hexpm/elixir:1.13.2-erlang-24.1.3-debian-bullseye-20210902-slim"
+ARG RUNNER_IMAGE="debian:bullseye-20210902-slim"
 
 FROM ${BUILDER_IMAGE} as builder
 
@@ -53,15 +48,15 @@ COPY priv priv
 # which customizes asset compilation based on what it finds in
 # your Elixir templates, you will need to move the asset compilation
 # step down so that `lib` is available.
-# compile assets
 COPY assets assets
 
+# compile assets
 RUN mix assets.deploy
-
-RUN mix compile
 
 # Compile the release
 COPY lib lib
+
+RUN mix compile
 
 # Changes to config/runtime.exs don't require recompiling the code
 COPY config/runtime.exs config/
