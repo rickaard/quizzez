@@ -19,7 +19,7 @@ defmodule QuizzezWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :quizzez,
-    gzip: false,
+    gzip: true,
     only: ~w(assets fonts images svg illustrations favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
