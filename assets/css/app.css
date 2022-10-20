@@ -52,12 +52,6 @@
     box-shadow: var(--drop-shadow-lower);
   }
 
-  .form-wrapper {
-    max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .form-group {
     margin-bottom: 16px;
   }

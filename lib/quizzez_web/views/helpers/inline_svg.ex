@@ -17,7 +17,7 @@ defmodule QuizzezWeb.SVGHelpers do
   end
 
   defp static_path(file_name) do
-    path = "assets/static/svg"
+    path = "assets/static/images/svg"
     [path, "#{file_name}.svg"] |> Path.join() |> Path.expand()
   end
 end

@@ -1,6 +1,6 @@
 <% categories = ~w[food geography history math misc music programming science workout] %>
 
-<div class="form-wrapper px-6 mx-2 sm:w-4/5 mb-4">
+<div class="max-w-2xl px-6 mx-auto sm:w-4/5 mb-4">
   <.form let={quiz} for={@changeset} phx-change="validate" phx-submit="save">
     <div class="form-group animate-fadeIn">
       <header class="form-group__heading flex">
