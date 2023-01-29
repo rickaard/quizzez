@@ -20,5 +20,6 @@ module.exports = {
       },
     },
   },
+  safelist: ["bg-primary", "text-primary", "text-primary-50", "bg-primary-50"],
   plugins: [require("@tailwindcss/forms")],
 };
