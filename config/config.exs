@@ -65,14 +65,15 @@ config :quizzez, QuizzezWeb.Authentication,
   issuer: "quizzez",
   secret_key: System.get_env("GUARDIAN_SECRET_KEY") || "mysupersecretkey"
 
+# Tailwind
 config :tailwind,
-  version: "3.0.7",
+  version: "3.1.8",
   default: [
     args: ~w(
-      --config=tailwind.config.js
-      --input=css/app.css
-      --output=../priv/static/assets/app.css
-    ),
+    --config=tailwind.config.js
+    --input=css/app.css
+    --output=../priv/static/assets/app.css
+  ),
     cd: Path.expand("../assets", __DIR__)
   ]
 
