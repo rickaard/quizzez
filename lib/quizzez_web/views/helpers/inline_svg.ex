@@ -17,7 +17,6 @@ defmodule QuizzezWeb.SVGHelpers do
   end
 
   defp static_path(file_name) do
-    path = "assets/static/images/svg"
-    [path, "#{file_name}.svg"] |> Path.join() |> Path.expand()
+    Path.join([:code.priv_dir(:quizzez), "static/images/svg", "#{file_name}.svg"])
   end
 end
